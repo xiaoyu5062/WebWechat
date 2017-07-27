@@ -2,11 +2,8 @@ using System.Net;
 using System.Text;
 using System;
 using System.IO;
-//using System.Net.Http;
-using System.Configuration;
 namespace ZFY
 {
-
     static class FYHttpHelper
     {
         public static string GetUrltoHtml(string Url,  string type="utf-8",CookieContainer cookie=null)
@@ -14,23 +11,11 @@ namespace ZFY
             try
             {
                 HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(Url);
-                //    Uri uUri=new Uri("http://61.55.135.192:82");
-                //    if(ProxyUtil.ValidateProxy("61.55.135.19",82)){
-                //         wReq.Proxy= new UseSpecifiedUriWebProxy(uUri);
-                //           FYCommon.Log(Url+"[使用代理]"+wReq.Proxy.ToString());
-                //    }
-                //    else
-                //    {
-                //        FYCommon.Log(Url+"[未使用代理]");
-                //    }
-
                 if (cookie != null)
                 {
                     wReq.CookieContainer = cookie;
                 }
                 var wResp = wReq.GetResponse();
-                //System.Net.WebResponse wResp = wReq.GetResponse();
-              
                 System.IO.Stream respStream = wResp.GetResponseStream();
                 using (System.IO.StreamReader reader = new System.IO.StreamReader(respStream, Encoding.GetEncoding(type)))
                 {
@@ -40,7 +25,6 @@ namespace ZFY
             catch (System.Exception ex)
             {
                 FYCommon.ErroLog("GetUrltoHtml:" + Url + "\r\n" + ex.Message);
-                // System.Console.WriteLine(ex);
                 return "";
             }
         }
@@ -83,64 +67,7 @@ namespace ZFY
 
     static class FYCommon
     {
-        #region 文件读写
-        public static void WriteFile(string dir,string fileName, string text)
-        {
-            try
-            {
-                ///Applications/XAMPP/xamppfiles/htdocs/news
-                //var path = string.Format("{0}/{1}", AppContext.BaseDirectory, DateTime.Now.ToString("yyyy/MM/dd"));
-                //  var path = "/Applications/XAMPP/xamppfiles/htdocs/news";
-                var path = ConfigurationSettings.AppSettings["newsPath"] + "/" + dir;
-
-                var filePath = path + "/" + fileName + ".html";
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-                {
-                    using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
-                    {
-                        sw.Write(text);
-                    }
-                }
-            }catch(Exception e)
-            {
-                Console.WriteLine("dir:"+dir+"\nfileName:"+fileName+"\n");
-                throw e;
-            }
-        }
-
-        /// <summary>
-        /// 获取模板html
-        /// </summary>
-        /// <param name="type">0新闻 1段子</param>
-        /// <returns></returns>
-        public static string GetTempHtml(int type)
-        {
-            // var path = "/Applications/XAMPP/xamppfiles/htdocs/news";
-            var path = ConfigurationSettings.AppSettings["tmpPath"];
-            var tempName = string.Empty;
-            if (type == 0)
-            {
-                tempName = "new.html";
-            }
-            else if (type == 1)
-            {
-                tempName = "Satin.html";
-            }
-            var filePath = path + "/" + tempName;
-            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            {
-                using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
-                {
-                    return sr.ReadToEnd();
-                }
-            }
-
-        }
-        #endregion
+       
 
         #region 日志
 
@@ -162,7 +89,12 @@ namespace ZFY
         }
         #endregion
 
-        #region 时间戳转换
+        #region 时间戳
+        public static string GetTimeStamp(System.DateTime? time)
+        {
+            long ts = ConvertDateTimeInt(time.HasValue?(DateTime)time:DateTime.Now);
+            return ts.ToString();
+        }
         /// <summary>
         /// 将Unix时间戳转换为DateTime类型时间
         /// </summary>

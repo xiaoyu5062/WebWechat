@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Xml;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -15,22 +10,33 @@ namespace WebWechat
 {
     public partial class index : System.Web.UI.Page
     {
+        #region Fileds
+        CookieContainer cookies;
+        string skey = string.Empty;
+        string sid = string.Empty;
+        string uin = string.Empty;
+        string deviceID = string.Empty;
+        string pass_ticket = string.Empty;
+        string payloadStr = string.Empty;
+        BaseRequest VAL_baseRequest = null;
+        JObject VAL_SyncKey = null;
+        JToken VAL_Self = null;
+        long time = 1498943586000;
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                //response.setHeader("Content-type", "text/html;charset=UTF-8");
                 Response.HeaderEncoding = System.Text.Encoding.UTF8;
-                Response.Charset="UTF-8";
-                Response.Write("我是中文");
+                Response.Charset = "UTF-8";
                 getQRCode();
             }
         }
-        long time = 1498943586000;
+       
         void getQRCode()
         {
-
-            var url = "https://login.wx.qq.com/jslogin?appid=wx782c26e4c19acffb&redirect_uri=https%3A%2F%2Fwx.qq.com%2Fcgi-bin%2Fmmwebwx-bin%2Fwebwxnewloginpage&fun=new&lang=zh_CN&_=" + GetTimeStamp(DateTime.Now);
+            var url = "https://login.wx.qq.com/jslogin?appid=wx782c26e4c19acffb&redirect_uri=https%3A%2F%2Fwx.qq.com%2Fcgi-bin%2Fmmwebwx-bin%2Fwebwxnewloginpage&fun=new&lang=zh_CN&_=" + ZFY.FYCommon.GetTimeStamp(DateTime.Now);
             var html = ZFY.FYHttpHelper.GetUrltoHtml(url);
             Response.Write(html);
             Response.Flush();
@@ -43,12 +49,11 @@ namespace WebWechat
                 Response.Flush();
                 WaitScan(uuid);
             }
-
         }
 
         void WaitScan(string uuid)
         {
-            string ts = GetTimeStamp(DateTime.Now);
+            string ts = ZFY.FYCommon.GetTimeStamp(DateTime.Now);
             long r = long.Parse(ts) - time;
             while (true)
             {
@@ -81,33 +86,18 @@ namespace WebWechat
             Response.Write("</br>----------------------");
             Response.Write("</br>开始登录...</br>");
             Response.Flush();
-            // var html = ZFY.FYHttpHelper.GetUrltoHtml(redirect + "&fun=new&version=v2");
-            CookieContainer cc = new CookieContainer();
-            var rs = ZFY.HttpWebResponseUtility.CreateGetHttpResponse(redirect + "&fun=new&version=v2", null, null, cc, "application/xml");
-            Stream stream = rs.GetResponseStream();
-            StreamReader sr = new StreamReader(stream,System.Text.Encoding.GetEncoding("utf-8"));
-            var html = sr.ReadToEnd();
+            cookies = new CookieContainer();
+            var html = ZFY.FYHttpHelper.GetUrltoHtml(redirect + "&fun=new&version=v2", cookie: cookies);
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.LoadXml(html);
-
             Response.Write(html);
             Response.Flush();
-            cookies = cc;
             InitWX(xmldoc);
         }
-        CookieContainer cookies;
-        string skey = string.Empty;
-        string sid = string.Empty;
-        string uin = string.Empty;
-        string deviceID = string.Empty;
-        string pass_ticket = string.Empty;
-        string payloadStr = string.Empty;
-        BaseRequest VAL_baseRequest = null;
-        JObject VAL_SyncKey = null;
-        JToken VAL_Self = null;
+      
         void InitWX(XmlDocument xml)
         {
-            string ts = GetTimeStamp(DateTime.Now);
+            string ts = ZFY.FYCommon.GetTimeStamp(DateTime.Now);
             long r = long.Parse(ts) - time;
             /*
              * 
@@ -168,23 +158,22 @@ namespace WebWechat
             //    Response.Write("</br>初始化失败喽，重新走一遍试试");
             //}
             // Response.Flush();
-          VAL_Self= json["User"];
-            Response.Write("</br>初始化完成。</br>用户信息:</br>UserName:"+VAL_Self["UserName"]+"</br>NickName:"+VAL_Self["NickName"]);
+            VAL_Self = json["User"];
+            Response.Write("</br>初始化完成。</br>用户信息:</br>UserName:" + VAL_Self["UserName"] + "</br>NickName:" + VAL_Self["NickName"]);
             SyncCheck((JObject)json["SyncKey"]);
             GetFriends();
-           // SendMsg();
+            // SendMsg();
         }
-
 
         void GetFriends()
         {
-            string ts = GetTimeStamp(DateTime.Now);
+            string ts = ZFY.FYCommon.GetTimeStamp(DateTime.Now);
             string url = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetcontact?lang=zh_CN&pass_ticket={0}&r={1}&seq=0&skey={2}", pass_ticket, ts, skey);
 
             HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(url);
             wReq.CookieContainer = cookies;
             wReq.Method = "GET";
-			wReq.ContentType = "application/json;charset=UTF-8";
+            wReq.ContentType = "application/json;charset=UTF-8";
             var wRes = wReq.GetResponse();
             StreamReader sr = new StreamReader(wRes.GetResponseStream());
             var html = sr.ReadToEnd();
@@ -194,7 +183,7 @@ namespace WebWechat
             var Ret = result["BaseResponse"]["Ret"];
             Response.Write("</br>Ret:" + Ret);
             var MemberCount = result["MemberCount"];
-            Response.Write("</br>好友数量："+MemberCount);
+            Response.Write("</br>好友数量：" + MemberCount);
             var list = result["MemberList"];
             foreach (var item in list.Children())
             {
@@ -202,11 +191,11 @@ namespace WebWechat
                 var NickName = item["NickName"];
                 var RemarkName = item["RemarkName"];
                 //"ContactFlag": 1 - 好友， 2 - 群组， 3 - 公众号
-                int ContactFlag =int.Parse( item["ContactFlag"].ToString());
-                string friendType = ContactFlag == 1 ? "好友" : ContactFlag == 2 ? "群组" : ContactFlag==3?"公众号":"未知"+ContactFlag;
-                Response.Write("</br>--------------</br>UserName:" + UserName + "</br>NickName:" + NickName+"("+friendType+ ")</br>RemarkName:"+RemarkName);
+                int ContactFlag = int.Parse(item["ContactFlag"].ToString());
+                string friendType = ContactFlag == 1 ? "好友" : ContactFlag == 2 ? "群组" : ContactFlag == 3 ? "公众号" : "未知" + ContactFlag;
+                Response.Write("</br>--------------</br>UserName:" + UserName + "</br>NickName:" + NickName + "(" + friendType + ")</br>RemarkName:" + RemarkName);
                 Response.Flush();
-                if (NickName.ToString()=="vic")
+                if (NickName.ToString() == "vic")
                 {
                     SendMsg("我是自动发送的", UserName.ToString());
                 }
@@ -248,9 +237,9 @@ namespace WebWechat
             //@9e3bf447167bb69b9a40a7e084d1cd8ded6ab2826093dbaaf7cbbc4087cda0cd  秋秋的
         }
 
-        void SendMsg(string content,string toUserName)
+        void SendMsg(string content, string toUserName)
         {
-            Response.Write("</br>-------------</br>发送["+content+"]给["+toUserName+"]");
+            Response.Write("</br>-------------</br>发送[" + content + "]给[" + toUserName + "]");
             Response.Flush();
             /*POST:
              * https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket=xxx            
@@ -294,7 +283,7 @@ LocalID: 与clientMsgId相同
                 //"@08e85ac96adb82a67a80c72e6403a049e15f759352c51fdf569e4ce2bf62019e"
                 Type = 1
             };
-             payload.Add("Msg", JToken.FromObject(msg));
+            payload.Add("Msg", JToken.FromObject(msg));
             payload.Add("Scene", 0);
             string url = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket={0}", pass_ticket);
             HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(url);
@@ -302,7 +291,7 @@ LocalID: 与clientMsgId相同
             wReq.ContentType = "application/json;charset=UTF-8";
             wReq.CookieContainer = cookies;
             wReq.Method = "POST";
-            
+
             Response.Write("</br>消息参数:" + payload.ToString().Replace("\r\n", ""));
             byte[] data = System.Text.Encoding.UTF8.GetBytes(payload.ToString().Replace("\r\n", ""));
             using (Stream stream = wReq.GetRequestStream())
@@ -328,7 +317,7 @@ LocalID: 与clientMsgId相同
             {
                 //https://webpush.wx.qq.com/cgi-bin/mmwebwx-bin/synccheck?r=1501042097300&skey=%40crypt_fa8c7d22_a72311e1a87a045893d475b18968c70c&sid=T1VVW9p0%2BFwu0%2B%2BB&uin=752194140&deviceid=e133973973929944&synckey=1_675439007%7C2_675439150%7C3_675439136%7C11_675439098%7C13_675340098%7C201_1501042054%7C1000_1501030261%7C1001_1501030292%7C1002_1500889686&_=1501041063253
                 System.Threading.Thread.Sleep(25000);
-                string ts = GetTimeStamp(DateTime.Now);
+                string ts = ZFY.FYCommon.GetTimeStamp(DateTime.Now);
                 long r = long.Parse(ts) - time;
                 while (true)
                 {
@@ -354,17 +343,6 @@ LocalID: 与clientMsgId相同
             });
             thread.IsBackground = true;
             thread.Start();
-        }
-        public static string GetTimeStamp(System.DateTime time)
-        {
-            long ts = ConvertDateTimeToInt(time);
-            return ts.ToString();
-        }
-        public static long ConvertDateTimeToInt(System.DateTime time)
-        {
-            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
-            long t = (time.Ticks - startTime.Ticks) / 10000;   //除10000调整为13位      
-            return t;
         }
     }
 }
