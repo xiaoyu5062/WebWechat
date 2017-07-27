@@ -11,6 +11,7 @@ namespace WebWechat
     public partial class index : System.Web.UI.Page
     {
         #region Fileds
+        long time = 1498943586000;//r参数和当前时间戳的差值
         CookieContainer cookies;
         string skey = string.Empty;
         string sid = string.Empty;
@@ -21,7 +22,7 @@ namespace WebWechat
         BaseRequest VAL_baseRequest = null;
         JObject VAL_SyncKey = null;
         JToken VAL_Self = null;
-        long time = 1498943586000;
+       
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
