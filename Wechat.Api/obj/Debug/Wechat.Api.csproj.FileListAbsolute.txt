@@ -1,0 +1,8 @@
+D:\GitHub\WebWechat\Wechat.Api\bin\Wechat.Api.dll.config
+D:\GitHub\WebWechat\Wechat.Api\bin\Wechat.Api.dll
+D:\GitHub\WebWechat\Wechat.Api\bin\Wechat.Api.pdb
+D:\GitHub\WebWechat\Wechat.Api\bin\Newtonsoft.Json.dll
+D:\GitHub\WebWechat\Wechat.Api\bin\Newtonsoft.Json.xml
+D:\GitHub\WebWechat\Wechat.Api\obj\Debug\Wechat.Api.csprojResolveAssemblyReference.cache
+D:\GitHub\WebWechat\Wechat.Api\obj\Debug\Wechat.Api.dll
+D:\GitHub\WebWechat\Wechat.Api\obj\Debug\Wechat.Api.pdb

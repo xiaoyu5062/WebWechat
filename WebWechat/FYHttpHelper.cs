@@ -34,18 +34,22 @@ namespace ZFY
         /// <param name="url">Url</param>
         /// <param name="param">参数</param>
         /// <returns></returns>
-        public static string PostUrltoHtml(string url, string param)
+        public static string PostUrltoHtml(string url, string param,CookieContainer cookie=null)
         {
             try
             {
                 HttpWebRequest wReq = (HttpWebRequest)HttpWebRequest.Create(url);
+                if (cookie != null)
+                {
+                    wReq.CookieContainer = cookie;
+                }
                 Encoding encoding = Encoding.UTF8;
                 wReq.Method = "POST";
                 byte[] bs = Encoding.ASCII.GetBytes(param);
                 string responseData = string.Empty;
                 wReq.ContentType = "application/x-www-form-urlencoded";
                 //using (Stream rs = wReq.GetRequestStreamAsync().Result)
-                using (Stream rs = wReq.GetResponse().GetResponseStream())
+                using (Stream rs = wReq.GetRequestStream())
                 {
                     rs.Write(bs, 0, bs.Length);
                 }

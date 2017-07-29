@@ -124,11 +124,11 @@ namespace WebWechat
             pass_ticket = xml.FirstChild.ChildNodes[5].InnerText;
             var url = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxinit?r=-{0}&pass_ticket={1}", r, pass_ticket);
 
-            HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(url);
-            wReq.Accept = "application/json, text/plain, */*";
-            wReq.ContentType = "application/json;charset=UTF-8";
-            wReq.CookieContainer = cookies;
-            wReq.Method = "POST";
+            //HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(url);
+            //wReq.Accept = "application/json, text/plain, */*";
+            //wReq.ContentType = "application/json;charset=UTF-8";
+            //wReq.CookieContainer = cookies;
+            //wReq.Method = "POST";
             InitBaseRequest payload = new InitBaseRequest();
             payload.BaseRequest = new BaseRequest()
             {
@@ -139,15 +139,15 @@ namespace WebWechat
             VAL_baseRequest = payload.BaseRequest;
             deviceID = payload.BaseRequest.DeviceID;
             payloadStr = JsonConvert.SerializeObject(payload);
-            byte[] data = System.Text.Encoding.UTF8.GetBytes(payloadStr);
-            using (Stream stream = wReq.GetRequestStream())
-            {
-                stream.Write(data, 0, data.Length);
-            }
-            var wRes = wReq.GetResponse();
-            StreamReader sr = new StreamReader(wRes.GetResponseStream());
-            var html = sr.ReadToEnd();
-
+            //byte[] data = System.Text.Encoding.UTF8.GetBytes(payloadStr);
+            //using (Stream stream = wReq.GetRequestStream())
+            //{
+            //    stream.Write(data, 0, data.Length);
+            //}
+            //var wRes = wReq.GetResponse();
+            //StreamReader sr = new StreamReader(wRes.GetResponseStream());
+            //var html = sr.ReadToEnd();
+            var html = ZFY.FYHttpHelper.PostUrltoHtml(url, payloadStr, cookies);
             JObject json = JObject.Parse(html);
             /*BaseResponse": { "Ret": 0, "ErrMsg": "" } */
             //if (html.Contains("\"BaseResponse\":{\"Ret\":0,\"ErrMsg\":\"\"}"))

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebWechat", "WebWechat\WebWechat.csproj", "{2630789A-771D-44B2-A3A8-BC7F5D3BF977}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wechat.Api", "Wechat.Api\Wechat.Api.csproj", "{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2630789A-771D-44B2-A3A8-BC7F5D3BF977}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2630789A-771D-44B2-A3A8-BC7F5D3BF977}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2630789A-771D-44B2-A3A8-BC7F5D3BF977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
