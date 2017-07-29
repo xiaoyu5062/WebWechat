@@ -2,4 +2,6 @@ WebWechat/bin/
 .vs/
 WebWechat/obj/
 packages/
-
+Wechat.Web/bin/
+Wechat.Web/obj/
+Wechat.Api/

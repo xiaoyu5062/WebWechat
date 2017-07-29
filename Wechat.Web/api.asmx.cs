@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +10,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
-namespace Wechat.Api
+namespace Wechat.Web
 {
     /// <summary>
     /// api 的摘要说明
@@ -40,7 +40,10 @@ namespace Wechat.Api
                 //获取成功 300秒有效期
                 var uuid = html.Split(';')[1].Split('\"')[1].Replace("\"", "");
                 var img_url = "https://login.weixin.qq.com/qrcode/" + uuid;
-                result.data = img_url;
+                JObject obj=new JObject();
+                obj.Add("uuid",uuid);
+                obj.Add("qrcode",img_url);
+                result.data = obj;
             }
             else
             {
@@ -56,8 +59,8 @@ namespace Wechat.Api
             Result result = new Result();
             string ts = ZFY.FYCommon.GetTimeStamp(DateTime.Now);
             long r = long.Parse(ts) - TIME;
-            while (true)
-            {
+            //while (true)
+            //{
                 string url = "https://login.wx.qq.com/cgi-bin/mmwebwx-bin/login?loginicon=true&uuid=" + uuid + "&tip=1&r=" + r + "&_=" + ts;
                 var html = ZFY.FYHttpHelper.GetUrltoHtml(url);
                 if (html.Contains("201"))
@@ -65,7 +68,8 @@ namespace Wechat.Api
                     //已扫码，等待确认
                     result.code = 201;
                     result.data = "已扫码，等待确认";
-                    System.Threading.Thread.Sleep(2000);
+                   System.Threading.Thread.Sleep(2000);
+                    //break;
                 }
                 else if (html.Contains("200"))
                 {
@@ -74,11 +78,15 @@ namespace Wechat.Api
                     string redirect = html.Split(';')[1].Split('\"')[1].Replace("\"", "");
                     //Response.Write("</br>已确认登录。");
                     Login(redirect);
-                    break;
+                  //  break;
                 }
-                r += 25045;
-                ts += 1;
-            }
+                else if(html.Contains("408")){
+                    result.code = 408;
+                }
+                //r += 25045;
+                //ts += 1;
+           // }
+            ResponseResult(result);
         }
 
         CookieContainer cookies;

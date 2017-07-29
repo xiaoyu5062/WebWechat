@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Wechat.Web/share.aspx">
+    <Files>
+      <File FileName="Wechat.Web/api.asmx" Line="1" Column="72" />
+      <File FileName="Wechat.Web/FYHttpHelper.cs" Line="1" Column="1" />
+      <File FileName="Wechat.Web/index.aspx" Line="1" Column="94" />
+      <File FileName="Wechat.Web/index.aspx.cs" Line="8" Column="21" />
+      <File FileName="Wechat.Web/packages.config" Line="1" Column="1" />
+      <File FileName="Wechat.Web/ResponseModel.cs" Line="11" Column="10" />
+      <File FileName="Wechat.Web/api.asmx.cs" Line="178" Column="10" />
+      <File FileName="Wechat.Web/share.aspx" Line="12" Column="10" />
+      <File FileName="Wechat.Web/share.aspx.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.WebWechat PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Wechat.Web PreferredExecutionTarget="MonoDevelop.Default" />
+  <DisabledProjects>
+    <String>Wechat.Api/Wechat.Web.csproj</String>
+  </DisabledProjects>
+</Properties>

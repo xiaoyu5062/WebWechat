@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Wechat.Api.index" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Wechat.Web.index" %>
 
 <!DOCTYPE html>
 
@@ -17,7 +17,8 @@
         function getQRCode() {
             $.post("api.asmx/GetQRCode", {}, function (data) {
                 if (data.code == 200) {
-                    $('#btn_getQRCode').attr('src') = data.data;
+                    $('#QRCode').attr('src', data.data);
+			        console.log(data.data);
                 }
             });
         }
