@@ -16,7 +16,7 @@
         </div>
         <div id="detail-94965" class="container">
             <div class="wrap">
-                <div class="row">
+                <div class="row"> 
                     <div class="col-xs-12">
                         <div class="detail-box">
                                 <div class="hd">张小三的咯</div>

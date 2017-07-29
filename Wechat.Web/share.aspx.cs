@@ -7,6 +7,6 @@ namespace Wechat.Web
 
     public partial class share : System.Web.UI.Page
     {
-
+         
     }
 }
