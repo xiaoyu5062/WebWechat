@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>张小三测试</title>
+    <title>裂变系统</title>
     <link rel="stylesheet" href="http://www.mlingdong.com/addons/time_boke/static/css/bootstrap.css">
         <link rel="stylesheet" href="http://www.mlingdong.com/addons/time_boke/static/css/ladda.css">
         <link rel="stylesheet" href="http://www.mlingdong.com/addons/time_boke/static/css/common.css">  
@@ -19,10 +19,10 @@
                 <div class="row"> 
                     <div class="col-xs-12">
                         <div class="detail-box">
-                                <div class="hd">张小三的咯</div>
+                                <div class="hd"><%=title%></div>
                                 <div class="bd">
                                     <div id="content" class="message-content">
-                                        <p>张小三活动内容</p>                                                                           </div>
+                                        <p><%=content%></p>                                                                           </div>
                                     <img id="qrcode" src="http://www.mlingdong.com/addons/time_boke/temp/default.jpg" />
                                     <p><span id="status">点击按钮生成二维码</span><span id="lack" style="display: none;"><span id="time">300</span>秒</span></p>
                                 </div>
