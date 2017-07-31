@@ -171,6 +171,73 @@ namespace Wechat.Web
         }
 
 
+        void SendMsg(string content, string toUserName)
+        {
+            /*POST:
+             * https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket=xxx            
+             BaseRequest:
+{
+    DeviceID:”xxx”
+    Sid:”xxx”
+    Skey:”xxx”
+    Uin:xxx
+}
+Msg:
+{
+    ClientMsgId:”14672041846800613”
+    Content:”hello, myself.”
+    FromUserName:”xxx”
+    LocalID:”14672041846800613”
+    ToUserName:”filehelper”
+    Type:1
+}
+Scene:0
+
+            说明：
+            Type: 1 文字消息，3 图片消息（先把图片上传得到MediaId再调用webwxsendmsg发送），其他消息类型没试。
+Content: 要发送的消息（发送图片消息时该字段为MediaId）
+FromUserName: 自己的ID
+ToUserName: 好友的ID
+ClientMsgId: 时间戳左移4位随后补上4位随机数 
+LocalID: 与clientMsgId相同
+             */
+
+            //string ts = GetTimeStamp(DateTime.Now);
+            //long r =0-( long.Parse(ts) - time);
+
+
+            //---------------------------------------------------
+           // JObject payload = new JObject();
+           // payload.Add("BaseRequest", JToken.FromObject(VAL_baseRequest));
+           // MsgRequest msg = new MsgRequest()
+           // {
+           //     Content = content,
+           //     FromUserName = VAL_Self["UserName"].ToString(),
+           //     ToUserName = toUserName,
+           //     //"@08e85ac96adb82a67a80c72e6403a049e15f759352c51fdf569e4ce2bf62019e"
+           //     Type = 1
+           // };
+           // payload.Add("Msg", JToken.FromObject(msg));
+           // payload.Add("Scene", 0);
+           // string url = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket={0}", pass_ticket);
+           // HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(url);
+           // wReq.Accept = "application/json, text/plain, */*";
+           // wReq.ContentType = "application/json;charset=UTF-8";
+           // wReq.CookieContainer = cookies;
+           // wReq.Method = "POST";
+
+           //// Response.Write("</br>消息参数:" + payload.ToString().Replace("\r\n", ""));
+           // byte[] data = System.Text.Encoding.UTF8.GetBytes(payload.ToString().Replace("\r\n", ""));
+           // using (Stream stream = wReq.GetRequestStream())
+           // {
+           //     stream.Write(data, 0, data.Length);
+           // }
+           // var wRes = wReq.GetResponse();
+           // StreamReader sr = new StreamReader(wRes.GetResponseStream());
+           // var html = sr.ReadToEnd();
+           // Response.Write(html);
+        }
+
         void ResponseResult(Result result)
         {
             Context.Response.AddHeader("content-type", "application/json");
