@@ -286,6 +286,9 @@
     <Content Include="static\js\spin.js" />
     <Content Include="Web.config" />
     <Content Include="share.aspx" />
+    <Content Include="admin\main.html" />
+    <Content Include="admin\company_list.html" />
+    <Content Include="login.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="api.asmx.cs">

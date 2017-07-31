@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>爆客系统</title>
+    <!--<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">-->
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>公司管理</h5>
+
+                            <!--<div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">选项 01</a>
+                                    </li>
+                                    <li><a href="#">选项 02</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>-->
+                        </div>
+                        <div class="ibox-content">
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                   placeholder="搜索表格...">
+
+                            <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                                <thead>
+                                        <tr>
+                                            <th>公司编号</th>
+                                            <th>公司名称</th>
+                                            <th>有效时间</th>
+                                            <th>剩余点数</th>
+                                            <th>爆客次数</th>
+                                            <th>爆客量</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="gradeX">
+                                            <td>1</td>
+                                            <td>玖厚科技</td>
+                                            <td>不限</td>
+                                            <td class="center">10000</td>
+                                            <td class="center">623</td>
+                                            <td class="center">1234321</td>
+                                            <td class="center"></td>
+                                        </tr>
+                                        <tr class="gradeX">
+                                            <td>2</td>
+                                            <td>天尊</td>
+                                            <td>不限</td>
+                                            <td class="center">998</td>
+                                            <td class="center">123</td>
+                                            <td class="center">14321</td>
+                                            <td class="center"></td>
+                                        </tr>
+                                        <tr class="gradeX">
+                                            <td>3</td>
+                                            <td>嗨趣网络</td>
+                                            <td>不限</td>
+                                            <td class="center">634</td>
+                                            <td class="center">123</td>
+                                            <td class="center">432553</td>
+                                            <td class="center"></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5">
+                                                <ul class="pagination pull-right"></ul>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+    <script src="js/content.min.js?v=1.0.0"></script>
+    <script>
+        $(document).ready(function(){$(".footable").footable();});
+    </script>
+</body>
+
+</html>
