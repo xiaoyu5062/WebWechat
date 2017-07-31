@@ -10,6 +10,11 @@ namespace Wechat.Web
 
         #region Fileds
         /// <summary>
+        /// 是否显示
+        /// </summary>
+        public bool show { get; set; }
+
+        /// <summary>
         /// 标题
         /// </summary>
         /// <value>The title.</value>
@@ -33,8 +38,16 @@ namespace Wechat.Web
         {
             if (!IsPostBack)
             {
+                show = true;
+                if (Request["i"] == null)
+                {
+                    show = false;
+                }
+               
+               
                 title = "cedcdcdcdc";
                 content = "这里是活动内容";
+                
             }
         }
     }

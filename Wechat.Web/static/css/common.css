@@ -1,0 +1,668 @@
+.page-login{
+	background: #f5f5f5;
+}
+.page-main{
+	padding: 80px 0;
+	min-height: 600px;
+}
+.page-detail{
+	background: #444;
+}
+.page-detail .mask{
+	background: #444;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: -1;
+}
+.page-detail .mask img{
+	width: 100%;
+	height: 100%;
+}
+.page-detail .wrap{
+	max-width: 460px;
+	margin: 0 auto;
+}
+
+.form-login{
+  max-width: 280px;
+  padding: 15px;
+  margin: 40px auto;
+  overflow: hidden;
+}
+.form-login .form-login-header{
+	text-align: center;
+	margin: 20px 0;
+}
+.form-login .form-login-footer{
+	text-align: center;
+	margin: 90px 0 0 0;
+	font-size: 12px;
+}
+
+.mt-20{
+	margin-top: 20px;
+}
+.mb-20{
+	margin-top: 20px;
+}
+.mr-20{
+	margin-right: 20px;
+}
+.ml-20{
+	margin-left: 20px;
+}
+
+.footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+	padding: 20px;
+	border-top: 1px solid #eee;
+	font-size: 12px;
+	background: #fff;
+	height: 70px;
+	overflow: hidden;
+	z-index: 99999999999;
+	/*CSS.94965*/
+}
+.footer p{
+	margin: 0;
+	line-height: 20px;
+}
+/*state overview 94965*/
+.state-overview .panel{
+	border: none;
+	background: #fafafa;
+}
+.state-overview .symbol, .state-overview .value {
+    display: inline-block;
+    text-align: center;
+}
+
+.state-overview .value  {
+    float: right;
+
+}
+
+.state-overview .value h1, .state-overview .value p  {
+    margin: 0;
+    padding: 0;
+    color: #AAA;
+}
+
+.state-overview .value h1 {
+    font-weight: 300;
+}
+
+.state-overview .symbol i {
+    color: #fff;
+    font-size: 50px;
+}
+
+.state-overview .symbol {
+    width: 40%;
+    padding: 25px 15px;
+    -webkit-border-radius: 4px 0px 0px 4px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.state-overview .value {
+    width: 58%;
+    padding-top: 21px;
+}
+
+.state-overview .terques {
+    background: #6ccac9;
+}
+
+.state-overview .red {
+    background: #ff6c60;
+}
+
+.state-overview .yellow {
+    background: #f8d347;
+}
+
+.state-overview .blue {
+    background: #57c8f2;
+}
+
+.detail-box{
+	width: 100%;
+	margin: 40px auto 0 auto;
+	background: #FFF;
+	overflow: hidden;
+	border-radius: 2px;
+}
+.detail-box .hd{
+	background: #f5f5f5;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+.detail-box .bd{
+	text-align: center;
+	padding:30px 20px 0 20px;
+	position: relative;
+}
+.detail-box .bd img{
+	width: 90%;
+	margin-bottom: 20px;
+	background: #fff;
+}
+.detail-box .bd p{
+	letter-spacing: 0.5px;
+	font-size: 14px;
+	color: #888;
+}
+
+.detail-box .bd .message-content{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 20px;
+	height: 100%;
+	overflow-y: scroll;
+	background: #fafafa;
+	/*CSS.94965*/
+	border-top: 1px solid #eee;
+	text-align: left;
+	display: none;
+}
+
+.detail-box .bd .message-content img{
+	max-width: 50%;
+}
+
+.detail-box .bd .message-content p{
+	background: #eee;
+	padding: 10px;
+	border-radius: 4px;
+	border:1px solid #eee
+}
+
+.detail-box .ft{
+	text-align: center;
+	padding: 10px 20px 20px 20px;
+}
+.detail-box .ft .btn{
+	background: #fff;
+	width: 100%;
+	color: #333;
+	border: 1px solid #005299;
+}
+.ladda-button[data-style=expand-left] .ladda-spinner{
+	top: 10px;
+}
+.ladda-button[data-style=expand-left][data-loading] .ladda-spinner{
+	top: 20px;
+}
+
+
+.detail-copy{
+	text-align: center;
+	font-size: 12px;
+	margin-top: 20px;
+}
+
+.qq-var{
+	width:100%;
+	overflow: hidden;
+	margin: 10px 0;
+}
+.qq-var a{
+	margin-left: 10px;
+	height: 20px;
+	line-height: 20px;
+	cursor: pointer;
+	text-decoration: none;
+}
+.qq-face {
+	overflow: hidden;
+    margin-right: -1px;
+	border: 1px solid #f0f0f0;
+}
+
+
+.qq-face a {
+    float: left;
+    width: 28px;
+    height: 28px;
+    font-size: 0;
+    text-indent: -999em;
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    cursor: pointer;
+    /*CSS.94965*/
+    background: url(//res.wx.qq.com/a/wx_fed/webwx/res/static/img/15BPafa.png) no-repeat;
+}
+
+.qq-face .qqface0 {
+	background-position: 0 0
+}
+
+.qq-face .qqface1 {
+	background-position: -29px 0
+}
+
+.qq-face .qqface2 {
+	background-position: -58px 0
+}
+
+.qq-face .qqface3 {
+	background-position: -87px 0
+}
+
+.qq-face .qqface4 {
+	background-position: -116px 0
+}
+
+.qq-face .qqface5 {
+	background-position: -145px 0
+}
+
+.qq-face .qqface6 {
+	background-position: -174px 0
+}
+
+.qq-face .qqface7 {
+	background-position: -203px 0
+}
+
+.qq-face .qqface8 {
+	background-position: -232px 0
+}
+
+.qq-face .qqface9 {
+	background-position: -261px 0
+}
+
+.qq-face .qqface10 {
+	background-position: -290px 0
+}
+
+.qq-face .qqface11 {
+	background-position: -319px 0
+}
+
+.qq-face .qqface12 {
+	background-position: -348px 0
+}
+
+.qq-face .qqface13 {
+	background-position: -377px 0
+}
+
+.qq-face .qqface14 {
+	background-position: -406px 0
+}
+
+.qq-face .qqface15 {
+	background-position: 0 -29px;
+	/*CSS.94965*/
+}
+
+.qq-face .qqface16 {
+	background-position: -29px -29px
+}
+
+.qq-face .qqface17 {
+	background-position: -58px -29px
+}
+
+.qq-face .qqface18 {
+	background-position: -87px -29px
+}
+
+.qq-face .qqface19 {
+	background-position: -116px -29px
+}
+
+.qq-face .qqface20 {
+	background-position: -145px -29px
+}
+
+.qq-face .qqface21 {
+	background-position: -174px -29px
+}
+
+.qq-face .qqface22 {
+	background-position: -203px -29px
+}
+
+.qq-face .qqface23 {
+	background-position: -232px -29px
+}
+
+.qq-face .qqface24 {
+	background-position: -261px -29px
+}
+
+.qq-face .qqface25 {
+	background-position: -290px -29px
+}
+
+.qq-face .qqface26 {
+	background-position: -319px -29px
+}
+
+.qq-face .qqface27 {
+	background-position: -348px -29px
+}
+
+.qq-face .qqface28 {
+	background-position: -377px -29px
+}
+
+.qq-face .qqface29 {
+	background-position: -406px -29px
+}
+
+.qq-face .qqface30 {
+	background-position: 0 -58px
+}
+
+.qq-face .qqface31 {
+	background-position: -29px -58px
+}
+
+.qq-face .qqface32 {
+	background-position: -58px -58px
+}
+
+.qq-face .qqface33 {
+	background-position: -87px -58px
+}
+
+.qq-face .qqface34 {
+	background-position: -116px -58px
+}
+
+.qq-face .qqface35 {
+	background-position: -145px -58px
+}
+
+.qq-face .qqface36 {
+	background-position: -174px -58px
+}
+
+.qq-face .qqface37 {
+	background-position: -203px -58px
+}
+
+.qq-face .qqface38 {
+	background-position: -232px -58px
+}
+
+.qq-face .qqface39 {
+	background-position: -261px -58px
+}
+
+.qq-face .qqface40 {
+	background-position: -290px -58px
+}
+
+.qq-face .qqface41 {
+	background-position: -319px -58px
+}
+
+.qq-face .qqface42 {
+	background-position: -348px -58px
+}
+
+.qq-face .qqface43 {
+	background-position: -377px -58px
+}
+
+.qq-face .qqface44 {
+	background-position: -406px -58px
+}
+
+.qq-face .qqface45 {
+	background-position: 0 -87px
+}
+
+.qq-face .qqface46 {
+	background-position: -29px -87px
+}
+
+.qq-face .qqface47 {
+	background-position: -58px -87px
+}
+
+.qq-face .qqface48 {
+	background-position: -87px -87px
+}
+
+.qq-face .qqface49 {
+	background-position: -116px -87px
+}
+
+.qq-face .qqface50 {
+	background-position: -145px -87px
+}
+
+.qq-face .qqface51 {
+	background-position: -174px -87px
+}
+
+.qq-face .qqface52 {
+	background-position: -203px -87px
+}
+
+.qq-face .qqface53 {
+	background-position: -232px -87px
+}
+
+.qq-face .qqface54 {
+	background-position: -261px -87px
+}
+
+.qq-face .qqface55 {
+	background-position: -290px -87px
+}
+
+.qq-face .qqface56 {
+	background-position: -319px -87px
+}
+
+.qq-face .qqface57 {
+	background-position: -348px -87px
+}
+
+.qq-face .qqface58 {
+	background-position: -377px -87px
+}
+
+.qq-face .qqface59 {
+	background-position: -406px -87px
+}
+
+.qq-face .qqface60 {
+	background-position: 0 -116px
+}
+
+.qq-face .qqface61 {
+	background-position: -29px -116px
+}
+
+.qq-face .qqface62 {
+	background-position: -58px -116px
+}
+
+.qq-face .qqface63 {
+	background-position: -87px -116px
+}
+
+.qq-face .qqface64 {
+	background-position: -116px -116px
+}
+
+.qq-face .qqface65 {
+	background-position: -145px -116px
+}
+
+.qq-face .qqface66 {
+	background-position: -174px -116px
+}
+
+.qq-face .qqface67 {
+	background-position: -203px -116px
+}
+
+.qq-face .qqface68 {
+	background-position: -232px -116px
+}
+
+.qq-face .qqface69 {
+	background-position: -261px -116px
+}
+
+.qq-face .qqface70 {
+	background-position: -290px -116px
+}
+
+.qq-face .qqface71 {
+	background-position: -319px -116px
+}
+
+.qq-face .qqface72 {
+	background-position: -348px -116px
+}
+
+.qq-face .qqface73 {
+	background-position: -377px -116px
+}
+
+.qq-face .qqface74 {
+	background-position: -406px -116px
+}
+
+.qq-face .qqface75 {
+	background-position: 0 -145px
+}
+
+.qq-face .qqface76 {
+	background-position: -29px -145px
+}
+
+.qq-face .qqface77 {
+	background-position: -58px -145px
+}
+
+.qq-face .qqface78 {
+	background-position: -87px -145px
+}
+
+.qq-face .qqface79 {
+	background-position: -116px -145px
+}
+
+.qq-face .qqface80 {
+	background-position: -145px -145px
+}
+
+.qq-face .qqface81 {
+	background-position: -174px -145px
+}
+
+.qq-face .qqface82 {
+	background-position: -203px -145px
+}
+
+.qq-face .qqface83 {
+	background-position: -232px -145px
+}
+
+.qq-face .qqface84 {
+	background-position: -261px -145px
+}
+
+.qq-face .qqface85 {
+	background-position: -290px -145px
+}
+
+.qq-face .qqface86 {
+	background-position: -319px -145px
+}
+
+.qq-face .qqface87 {
+	background-position: -348px -145px
+}
+
+.qq-face .qqface88 {
+	background-position: -377px -145px
+}
+
+.qq-face .qqface89 {
+	background-position: -406px -145px
+}
+
+.qq-face .qqface90 {
+	background-position: 0 -174px
+}
+
+.qq-face .qqface91 {
+	background-position: -29px -174px
+}
+
+.qq-face .qqface92 {
+	background-position: -58px -174px
+}
+
+.qq-face .qqface93 {
+	background-position: -87px -174px
+}
+
+.qq-face .qqface94 {
+	background-position: -116px -174px
+}
+
+.qq-face .qqface95 {
+	background-position: -145px -174px
+}
+
+.qq-face .qqface96 {
+	background-position: -174px -174px
+}
+
+.qq-face .qqface97 {
+	background-position: -203px -174px
+}
+
+.qq-face .qqface98 {
+	background-position: -232px -174px
+}
+
+.qq-face .qqface99 {
+	background-position: -261px -174px
+}
+
+.qq-face .qqface100 {
+	background-position: -290px -174px
+}
+
+.qq-face .qqface101 {
+	background-position: -319px -174px
+}
+
+.qq-face .qqface102 {
+	background-position: -348px -174px
+}
+
+.qq-face .qqface103 {
+	background-position: -377px -174px
+}
+
+.qq-face .qqface104 {
+	background-position: -406px -174px
+}
+
+.state-overview a{
+	display: block;
+}

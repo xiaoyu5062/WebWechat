@@ -6,16 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>裂变系统</title>
-    <link rel="stylesheet" href="http://www.mlingdong.com/addons/time_boke/static/css/bootstrap.css">
-        <link rel="stylesheet" href="http://www.mlingdong.com/addons/time_boke/static/css/ladda.css">
-        <link rel="stylesheet" href="http://www.mlingdong.com/addons/time_boke/static/css/common.css">  
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+        <link rel="stylesheet" href="static/css/ladda.css">
+        <link rel="stylesheet" href="static/css/common.css">  
   </head>
   <body class="page-detail">
         <div class="mask">
-            <img src="http://www.mlingdong.com/addons/time_boke/temp/bg.jpg" />
+            <img src="static/imgs/bg.jpg" />
         </div>
         <div id="detail-94965" class="container">
             <div class="wrap">
+                <%if (show)
+                    { %>
                 <div class="row"> 
                     <div class="col-xs-12">
                         <div class="detail-box">
@@ -23,7 +25,7 @@
                                 <div class="bd">
                                     <div id="content" class="message-content">
                                         <p><%=content%></p>                                                                           </div>
-                                    <img id="qrcode" src="http://www.mlingdong.com/addons/time_boke/temp/default.jpg" />
+                                    <img id="qrcode" src="static/imgs/default.jpg" />
                                     <p><span id="status">点击按钮生成二维码</span><span id="lack" style="display: none;"><span id="time">300</span>秒</span></p>
                                 </div>
                                 <div class="ft">
@@ -39,17 +41,22 @@
                         </div>
                     </div>
                 </div>
+                <%}
+                    else
+                    { %>
+                <p>该条消息不存在</p>
+                <%} %>
             </div>
         </div>
         <input type="hidden" id="uuid" value="" />
-        <script src='http://www.mlingdong.com/addons/time_boke/static/js/jquery.js'></script>
-        <script src='http://www.mlingdong.com/addons/time_boke/static/js/spin.js'></script>
-        <script src='http://www.mlingdong.com/addons/time_boke/static/js/ladda.js'></script>
-    <script src='http://www.mlingdong.com/addons/time_boke/static/js/bootstrap.js'></script>
+        <script src='static/js/jquery.js'></script>
+        <script src='static/js/spin.js'></script>
+        <script src='static/js/ladda.js'></script>
+    <script src='static/js/bootstrap.js'></script>
     <script>
         var trynum = 0;
-        var photo = "http://www.mlingdong.com/addons/time_boke/temp/default.jpg";
-        var nocode = "http://www.mlingdong.com/addons/time_boke/static/images/error.jpg";
+        var photo = "static/imgs/default.jpg";
+        var nocode = "static/imgs/error.jpg";
             var xhr,timedely;
 
             $('#ladda-button').click(function(e){
