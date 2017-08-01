@@ -25,7 +25,6 @@
                     <h1 class="logo-name">B</h1>
                 </div>
                 <h3>欢迎使用 爆客系统</h3>
-                <form class="m-t" role="form">
                     <div class="form-group">
                           <asp:TextBox ID="txt_username" TextMode="SingleLine" runat="server" class="form-control" placeholder="用户名" required=""></asp:TextBox>
                     </div>
@@ -33,9 +32,6 @@
                         <asp:TextBox ID="txt_pwd" TextMode="Password" runat="server" class="form-control" placeholder="密码" required=""></asp:TextBox>
                     </div>
                     <asp:Button ID="btn_login" class="btn btn-red block full-width m-b" runat="server" OnClick="btn_login_Click" Text="登 录" />
-                    <!--<p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
-                </p>-->
-                <%--</form>--%>
             </div>
         </div>
         <script src="admin/js/jquery.min.js?v=2.1.4"></script>
