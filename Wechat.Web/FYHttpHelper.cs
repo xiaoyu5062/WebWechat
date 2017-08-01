@@ -2,6 +2,12 @@ using System.Net;
 using System.Text;
 using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Data;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
+
 namespace ZFY
 {
     static class FYHttpHelper
@@ -69,7 +75,7 @@ namespace ZFY
         }
     }
 
-    static class FYCommon
+    public static class FYCommon
     {
        
 
@@ -127,6 +133,118 @@ namespace ZFY
             return t;
         }
 
+        #endregion
+
+        public static string GetMD5(this string myString, bool isLower = false)
+        {
+            // Use input string to calculate MD5 hash
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(myString);
+            byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+            // Convert the byte array to hexadecimal string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashBytes.Length; i++)
+            {
+                if (!isLower)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                else
+                {
+                    sb.Append(hashBytes[i].ToString("x2"));
+                }
+
+            }
+            return sb.ToString();
+        }
+    }
+
+    public static class DataExtensions
+    {
+        /// <summary>
+        /// DataRow扩展方法：将DataRow类型转化为指定类型的实体
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <returns></returns>
+        public static T ToModel<T>(this DataRow dr) where T : class, new()
+        {
+            return ToModel<T>(dr, true);
+        }
+        /// <summary>
+        /// DataRow扩展方法：将DataRow类型转化为指定类型的实体
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="dateTimeToString">是否需要将日期转换为字符串，默认为转换,值为true</param>
+        /// <returns></returns>
+        /// <summary>
+        public static T ToModel<T>(this DataRow dr, bool dateTimeToString) where T : class, new()
+        {
+            if (dr != null)
+                return ToList<T>(dr.Table, dateTimeToString).First();
+            return null;
+        }
+        /// <summary>
+        /// DataTable扩展方法：将DataTable类型转化为指定类型的实体集合
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <returns></returns>
+        public static List<T> ToList<T>(this DataTable dt) where T : class, new()
+        {
+            return ToList<T>(dt, true);
+        }
+        /// <summary>
+        /// DataTable扩展方法：将DataTable类型转化为指定类型的实体集合
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="dateTimeToString">是否需要将日期转换为字符串，默认为转换,值为true</param>
+        /// <returns></returns>
+        public static List<T> ToList<T>(this DataTable dt, bool dateTimeToString) where T : class, new()
+        {
+            List<T> list = new List<T>();
+
+            if (dt != null)
+            {
+                List<PropertyInfo> infos = new List<PropertyInfo>();
+                Array.ForEach<PropertyInfo>(typeof(T).GetProperties(), p =>
+                {
+                    if (dt.Columns.Contains(p.Name) == true)
+                    {
+                        infos.Add(p);
+                    }
+                });
+                SetList<T>(list, infos, dt, dateTimeToString);
+            }
+            return list;
+        }
+        #region 私有方法
+        private static void SetList<T>(List<T> list, List<PropertyInfo> infos, DataTable dt, bool dateTimeToString) where T : class, new()
+        {
+            foreach (DataRow dr in dt.Rows)
+            {
+                T model = new T();
+                infos.ForEach(p =>
+                {
+                    if (dr[p.Name] != DBNull.Value)
+                    {
+                        object tempValue = dr[p.Name];
+                        if (dr[p.Name].GetType() == typeof(DateTime) && dateTimeToString == true)
+                        {
+                            tempValue = dr[p.Name].ToString();
+                        }
+                        try
+                        {
+                            p.SetValue(model, tempValue, null);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
+                });
+                list.Add(model);
+            }
+        }
         #endregion
     }
 

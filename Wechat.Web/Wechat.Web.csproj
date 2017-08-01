@@ -38,7 +38,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DbUtility">
+      <HintPath>..\dll\DbUtility.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -60,6 +67,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\emp.aspx" />
+    <Content Include="admin\company.aspx" />
+    <Content Include="admin\index.aspx" />
     <Content Include="api.asmx" />
     <Content Include="admin\css\animate.min.css" />
     <Content Include="admin\css\bootstrap.min.css" />
@@ -277,9 +287,13 @@
     <Content Include="admin\plugins\fullavatareditor\scripts\jQuery.Cookie.js" />
     <Content Include="admin\plugins\fullavatareditor\scripts\swfobject.js" />
     <Content Include="admin\plugins\fullavatareditor\scripts\test.js" />
+    <Content Include="login.aspx" />
     <Content Include="static\css\bootstrap.css" />
     <Content Include="static\css\common.css" />
     <Content Include="static\css\ladda.css" />
+    <Content Include="static\imgs\bg.jpg" />
+    <Content Include="static\imgs\default.jpg" />
+    <Content Include="static\imgs\error.jpg" />
     <Content Include="static\js\bootstrap.js" />
     <Content Include="static\js\jquery.js" />
     <Content Include="static\js\ladda.js" />
@@ -287,10 +301,31 @@
     <Content Include="Web.config" />
     <Content Include="share.aspx" />
     <Content Include="admin\main.html" />
-    <Content Include="admin\company_list.html" />
     <Content Include="login.html" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\emp.aspx.cs">
+      <DependentUpon>emp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\emp.aspx.designer.cs">
+      <DependentUpon>emp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\company.aspx.cs">
+      <DependentUpon>company.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\company.aspx.designer.cs">
+      <DependentUpon>company.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Model\User.cs" />
     <Compile Include="api.asmx.cs">
       <DependentUpon>api.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -302,6 +337,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseModel.cs" />

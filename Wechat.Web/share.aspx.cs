@@ -36,6 +36,12 @@ namespace Wechat.Web
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
+             定义参数
+             u  用户id    
+             p  用户父级
+             m  消息ID
+             */
             if (!IsPostBack)
             {
                 show = true;

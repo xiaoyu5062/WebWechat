@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,7 +24,13 @@ namespace Wechat.Web
     {
         const long TIME = 1498943586000;//r参数和当前时间戳的差值
 
-
+        [WebMethod]
+        public string test() {
+         var now=   ZFY.FYCommon.GetTimeStamp(null);
+            var r = long.Parse(now) - TIME;
+            var fan = ~long.Parse(now);
+            return "a=" + r + "   b=" + fan;
+        }
         /// <summary>
         /// 获取登录二维码
         /// </summary>
@@ -40,9 +46,9 @@ namespace Wechat.Web
                 //获取成功 300秒有效期
                 var uuid = html.Split(';')[1].Split('\"')[1].Replace("\"", "");
                 var img_url = "https://login.weixin.qq.com/qrcode/" + uuid;
-                JObject obj=new JObject();
-                obj.Add("uuid",uuid);
-                obj.Add("qrcode",img_url);
+                JObject obj = new JObject();
+                obj.Add("uuid", uuid);
+                obj.Add("qrcode", img_url);
                 result.data = obj;
             }
             else
@@ -61,31 +67,32 @@ namespace Wechat.Web
             long r = long.Parse(ts) - TIME;
             //while (true)
             //{
-                string url = "https://login.wx.qq.com/cgi-bin/mmwebwx-bin/login?loginicon=true&uuid=" + uuid + "&tip=1&r=" + r + "&_=" + ts;
-                var html = ZFY.FYHttpHelper.GetUrltoHtml(url);
-                if (html.Contains("201"))
-                {
-                    //已扫码，等待确认
-                    result.code = 201;
-                    result.data = "已扫码，等待确认";
-                   System.Threading.Thread.Sleep(2000);
-                    //break;
-                }
-                else if (html.Contains("200"))
-                {
-                    result.code = 200;
+            string url = "https://login.wx.qq.com/cgi-bin/mmwebwx-bin/login?loginicon=true&uuid=" + uuid + "&tip=1&r=" + r + "&_=" + ts;
+            var html = ZFY.FYHttpHelper.GetUrltoHtml(url);
+            if (html.Contains("201"))
+            {
+                //已扫码，等待确认
+                result.code = 201;
+                result.data = "已扫码，等待确认";
+                System.Threading.Thread.Sleep(2000);
+                //break;
+            }
+            else if (html.Contains("200"))
+            {
+                result.code = 200;
 
-                    string redirect = html.Split(';')[1].Split('\"')[1].Replace("\"", "");
-                    //Response.Write("</br>已确认登录。");
-                    Login(redirect);
-                  //  break;
-                }
-                else if(html.Contains("408")){
-                    result.code = 408;
-                }
-                //r += 25045;
-                //ts += 1;
-           // }
+                string redirect = html.Split(';')[1].Split('\"')[1].Replace("\"", "");
+                //Response.Write("</br>已确认登录。");
+                Login(redirect);
+                //  break;
+            }
+            else if (html.Contains("408"))
+            {
+                result.code = 408;
+            }
+            //r += 25045;
+            //ts += 1;
+            // }
             ResponseResult(result);
         }
 
@@ -127,7 +134,9 @@ namespace Wechat.Web
             {
                 //成功
                 var cur_user = json["User"];//当前扫码用户
-                SyncCheck(json["SyncKey"], baseRequest);
+                                            // SyncCheck(json["SyncKey"], baseRequest);
+                                            //直接发送消息了
+
             }
             else
             {
@@ -207,35 +216,41 @@ LocalID: 与clientMsgId相同
 
 
             //---------------------------------------------------
-           // JObject payload = new JObject();
-           // payload.Add("BaseRequest", JToken.FromObject(VAL_baseRequest));
-           // MsgRequest msg = new MsgRequest()
-           // {
-           //     Content = content,
-           //     FromUserName = VAL_Self["UserName"].ToString(),
-           //     ToUserName = toUserName,
-           //     //"@08e85ac96adb82a67a80c72e6403a049e15f759352c51fdf569e4ce2bf62019e"
-           //     Type = 1
-           // };
-           // payload.Add("Msg", JToken.FromObject(msg));
-           // payload.Add("Scene", 0);
-           // string url = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket={0}", pass_ticket);
-           // HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(url);
-           // wReq.Accept = "application/json, text/plain, */*";
-           // wReq.ContentType = "application/json;charset=UTF-8";
-           // wReq.CookieContainer = cookies;
-           // wReq.Method = "POST";
+            // JObject payload = new JObject();
+            // payload.Add("BaseRequest", JToken.FromObject(VAL_baseRequest));
+            // MsgRequest msg = new MsgRequest()
+            // {
+            //     Content = content,
+            //     FromUserName = VAL_Self["UserName"].ToString(),
+            //     ToUserName = toUserName,
+            //     //"@08e85ac96adb82a67a80c72e6403a049e15f759352c51fdf569e4ce2bf62019e"
+            //     Type = 1
+            // };
+            // payload.Add("Msg", JToken.FromObject(msg));
+            // payload.Add("Scene", 0);
+            // string url = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket={0}", pass_ticket);
+            // HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(url);
+            // wReq.Accept = "application/json, text/plain, */*";
+            // wReq.ContentType = "application/json;charset=UTF-8";
+            // wReq.CookieContainer = cookies;
+            // wReq.Method = "POST";
 
-           //// Response.Write("</br>消息参数:" + payload.ToString().Replace("\r\n", ""));
-           // byte[] data = System.Text.Encoding.UTF8.GetBytes(payload.ToString().Replace("\r\n", ""));
-           // using (Stream stream = wReq.GetRequestStream())
-           // {
-           //     stream.Write(data, 0, data.Length);
-           // }
-           // var wRes = wReq.GetResponse();
-           // StreamReader sr = new StreamReader(wRes.GetResponseStream());
-           // var html = sr.ReadToEnd();
-           // Response.Write(html);
+            //// Response.Write("</br>消息参数:" + payload.ToString().Replace("\r\n", ""));
+            // byte[] data = System.Text.Encoding.UTF8.GetBytes(payload.ToString().Replace("\r\n", ""));
+            // using (Stream stream = wReq.GetRequestStream())
+            // {
+            //     stream.Write(data, 0, data.Length);
+            // }
+            // var wRes = wReq.GetResponse();
+            // StreamReader sr = new StreamReader(wRes.GetResponseStream());
+            // var html = sr.ReadToEnd();
+            // Response.Write(html);
+        }
+
+        void UploadImg()
+        {
+            //https://file.wx.qq.com/cgi-bin/mmwebwx-bin/webwxuploadmedia?f=json
+            //Content-Type:multipart/form-data;
         }
 
         void ResponseResult(Result result)
