@@ -25,7 +25,7 @@
                     <h1 class="logo-name">B</h1>
                 </div>
                 <h3>欢迎使用 爆客系统</h3>
-               <%-- <form class="m-t" role="form">--%>
+                <form class="m-t" role="form">
                     <div class="form-group">
                           <asp:TextBox ID="txt_username" TextMode="SingleLine" runat="server" class="form-control" placeholder="用户名" required=""></asp:TextBox>
                     </div>

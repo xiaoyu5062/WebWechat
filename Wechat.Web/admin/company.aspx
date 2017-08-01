@@ -91,7 +91,6 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">公司名称：</label>
                                     <div class="col-sm-9">
-                                        <%--<input type="text" name="company" id="company" class="form-control" placeholder="请输入公司名称" required="">--%>
                                         <asp:TextBox ID="tb_company" runat="server" class="form-control" placeholder="请输入公司名称" required=""></asp:TextBox>
                                         <span class="help-block m-b-none"></span>
                                     </div>
@@ -99,7 +98,6 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">登录账号：</label>
                                     <div class="col-sm-9">
-                                        <%-- <input type="text" name="login" id="login" class="form-control" placeholder="请输入登录账号" required="">--%>
                                         <asp:TextBox ID="tb_login" runat="server" class="form-control" placeholder="请输入登录账号" required=""></asp:TextBox>
                                         <span class="help-block m-b-none"></span>
                                     </div>
@@ -107,7 +105,6 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">登录密码：</label>
                                     <div class="col-sm-9">
-                                        <%--<input type="password" class="form-control" name="pwd1" id="pwd1" placeholder="请输入密码" required="">--%>
                                         <asp:TextBox ID="tb_pwd1" runat="server" TextMode="Password" class="form-control" placeholder="请输入密码" required=""></asp:TextBox>
                                         <span class="help-block m-b-none"></span>
                                     </div>
@@ -115,13 +112,12 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">密码验证：</label>
                                     <div class="col-sm-9">
-                                        <%-- <input type="password" class="form-control" name="pwd2" id="pwd2" placeholder="请再次输入密码" required="">--%>
                                         <asp:TextBox ID="tb_pwd2" runat="server" TextMode="Password" class="form-control" placeholder="请再次输入密码" required=""></asp:TextBox>
                                         <span class="help-block m-b-none"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-sm-offset-3">
-                                    <%--  <button class="btn btn-primary" id="btn_save" type="submit">保存</button>--%>
+                                    <!--  <button class="btn btn-primary" id="btn_save" type="submit">保存</button>-->
                                     <!--<button class="btn btn-white"  type="button">取消</button>-->
                                     <asp:Button ID="btn_sava" OnClick="btn_sava_Click" runat="server" Text="保存" />
                                 </div>
