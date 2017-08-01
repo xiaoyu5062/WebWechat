@@ -302,6 +302,7 @@
     <Content Include="share.aspx" />
     <Content Include="admin\main.html" />
     <Content Include="login.html" />
+    <Content Include="admin\msg.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\emp.aspx.cs">
@@ -354,6 +355,13 @@
     <Compile Include="share.aspx.designer.cs">
       <DependentUpon>share.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\msg.aspx.cs">
+      <DependentUpon>msg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\msg.aspx.designer.cs">
+      <DependentUpon>msg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

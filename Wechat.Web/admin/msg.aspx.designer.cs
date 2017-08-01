@@ -8,15 +8,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Wechat.Web {
+namespace Wechat.Web.admin {
 	
 	
-	public partial class login {
+	public partial class Msg {
 		
-		protected System.Web.UI.WebControls.TextBox txt_username;
+		protected System.Web.UI.WebControls.TextBox tb_title;
 		
-		protected System.Web.UI.WebControls.TextBox txt_pwd;
+		protected System.Web.UI.WebControls.TextBox tb_content;
 		
-		protected System.Web.UI.WebControls.Button btn_login;
+		protected System.Web.UI.WebControls.Button btn_sava;
 	}
 }

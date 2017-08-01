@@ -33,4 +33,40 @@ namespace Wechat.Web.admin.Model
         public int scan_used { get; set; }
         public int scan_user { get; set; }
     }
+
+    [Serializable]
+    public class Message{
+
+        public int id
+        {
+            get;
+            set;
+        }
+        public int uid
+        {
+            get;
+            set;
+        }
+        public string title
+        {
+            get;
+            set;
+        }
+        public string    content
+        {
+            get;
+            set;
+        }
+
+        public string create_dt
+        {
+            get;
+            set;
+        }
+        public int state
+        {
+            get;
+            set;
+        }
+    }
 }

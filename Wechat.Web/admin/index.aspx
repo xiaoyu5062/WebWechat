@@ -74,7 +74,7 @@
 
                     </li>
                     <li>
-                        <a class="J_menuItem" href="layouts1.html"><i class="fa fa-commenting"></i><span class="nav-label">消息管理</span></a>
+                        <a class="J_menuItem" href="msg.aspx"><i class="fa fa-commenting"></i><span class="nav-label">消息管理</span></a>
                     </li>
                     <%
                         if (user.level == -1 || user.level == 3)//Admin/代理可管理公司

@@ -1,17 +1,22 @@
 ﻿<Properties StartupConfiguration="{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Wechat.Web/admin/emp.aspx">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Wechat.Web/admin/msg.aspx">
     <Files>
-      <File FileName="Wechat.Web/login.aspx.cs" Line="22" Column="36" />
-      <File FileName="Wechat.Web/login.aspx" Line="11" Column="5" />
+      <File FileName="Wechat.Web/login.aspx.cs" Line="33" Column="1" />
+      <File FileName="Wechat.Web/login.aspx" Line="9" Column="18" />
       <File FileName="Wechat.Web/admin/emp.aspx" Line="1" Column="1" />
+      <File FileName="Wechat.Web/Web.config" Line="24" Column="14" />
+      <File FileName="Wechat.Web/admin/msg.aspx" Line="30" Column="28" />
+      <File FileName="Wechat.Web/admin/msg.aspx.cs" Line="18" Column="76" />
+      <File FileName="Wechat.Web/admin/company.aspx.cs" Line="1" Column="1" />
+      <File FileName="Wechat.Web/admin/index.aspx" Line="83" Column="25" />
+      <File FileName="Wechat.Web/admin/UserManager.cs" Line="16" Column="6" />
+      <File FileName="Wechat.Web/admin/Model/User.cs" Line="17" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.WebWechat PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/zhangfengyang/Desktop/vs/WebWechat/Wechat.Web/login.aspx.cs" relfile="Wechat.Web/login.aspx.cs" line="21" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
