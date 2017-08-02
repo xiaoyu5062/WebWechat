@@ -92,7 +92,7 @@
                     </li>
                     <%} %>
                     <li>
-                        <a class="J_menuItem" href="layouts4.html"><i class="fa fa-send"></i><span class="nav-label">发送记录</span></a>
+                        <a class="J_menuItem" href="msglog.aspx"><i class="fa fa-send"></i><span class="nav-label">发送记录</span></a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="layouts5.html"><i class="fa fa-cog"></i><span class="nav-label">系统设置</span></a>

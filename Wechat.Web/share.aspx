@@ -169,7 +169,7 @@
                         }
                 },"json").error(function(){
                     console.log("请求错误");
-                    sendMessage(id,ticket);
+                    sendMessage();
                 });
             }
             $("#show-message").click(function(){

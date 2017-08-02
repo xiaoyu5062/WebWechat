@@ -1,18 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion></ProductVersion>
     <ProjectGuid>{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wechat.Web</RootNamespace>
     <AssemblyName>Wechat.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -305,8 +302,10 @@
     <Content Include="admin\main.html" />
     <Content Include="login.html" />
     <Content Include="admin\Msg.aspx" />
+    <Content Include="admin\msglog.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\emp.aspx.designer.cs" />
     <Compile Include="admin\emp.aspx.cs">
       <DependentUpon>emp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -330,7 +329,6 @@
       <DependentUpon>api.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="admin\emp.aspx.designer.cs" />
     <Compile Include="FYHttpHelper.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -363,6 +361,13 @@
       <DependentUpon>Msg.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\UserManager.cs" />
+    <Compile Include="admin\msglog.cs">
+      <DependentUpon>msglog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\msglog.aspx.designer.cs">
+      <DependentUpon>msglog.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -410,8 +415,7 @@
           <IISUrl>http://localhost:11492/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl></CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

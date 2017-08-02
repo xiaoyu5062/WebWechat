@@ -11,11 +11,15 @@
 namespace Wechat.Web.admin {
 	
 	
-	public partial class Msg {
+	public partial class msglog {
 		
-		protected System.Web.UI.WebControls.TextBox tb_title;
+		protected System.Web.UI.WebControls.TextBox tb_company;
 		
-		protected System.Web.UI.WebControls.TextBox tb_content;
+		protected System.Web.UI.WebControls.TextBox tb_login;
+		
+		protected System.Web.UI.WebControls.TextBox tb_pwd1;
+		
+		protected System.Web.UI.WebControls.TextBox tb_pwd2;
 		
 		protected System.Web.UI.WebControls.Button btn_sava;
 	}

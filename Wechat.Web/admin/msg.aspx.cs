@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Wechat.Web.admin
 {
@@ -16,11 +12,12 @@ namespace Wechat.Web.admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try{
             self = admin.UserManager.UserSession[Context.User.Identity.Name];
-            if (self==null)
-            {
-                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
-                return;
+            }
+            catch{
+				System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+				return;   
             }
             msg = "ok";
             if (!IsPostBack)

@@ -1,16 +1,9 @@
 ﻿<Properties StartupConfiguration="{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Wechat.Web/admin/msg.aspx">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Wechat.Web/admin/msglog.cs">
     <Files>
-      <File FileName="Wechat.Web/login.aspx.cs" Line="33" Column="1" />
-      <File FileName="Wechat.Web/login.aspx" Line="9" Column="18" />
-      <File FileName="Wechat.Web/admin/emp.aspx" Line="1" Column="1" />
-      <File FileName="Wechat.Web/Web.config" Line="24" Column="14" />
-      <File FileName="Wechat.Web/admin/msg.aspx" Line="30" Column="28" />
-      <File FileName="Wechat.Web/admin/msg.aspx.cs" Line="18" Column="76" />
-      <File FileName="Wechat.Web/admin/company.aspx.cs" Line="1" Column="1" />
-      <File FileName="Wechat.Web/admin/index.aspx" Line="83" Column="25" />
-      <File FileName="Wechat.Web/admin/UserManager.cs" Line="16" Column="6" />
-      <File FileName="Wechat.Web/admin/Model/User.cs" Line="17" Column="18" />
+      <File FileName="Wechat.Web/admin/msglog.aspx" Line="61" Column="123" />
+      <File FileName="Wechat.Web/admin/msglog.cs" Line="36" Column="10" />
+      <File FileName="Wechat.Web/admin/Model/User.cs" Line="74" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -19,6 +12,7 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <AuthorInfo Name="张逢阳" Email="xiaoyu5062@qq.com" Copyright="杭州玖厚科技有限公司" Company="" Trademark="" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Wechat.Web PreferredExecutionTarget="MonoDevelop.Default" />
   <DisabledProjects>

@@ -91,7 +91,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">员工名称：</label>
                                     <div class="col-sm-9">
-                                        <asp:TextBox ID="tb_company" runat="server" class="form-control" placeholder="请输入员工名称" required=""></asp:TextBox><asp:Button ID="Button1" runat="server" Text="Button" />
+                                        <asp:TextBox ID="tb_company" runat="server" class="form-control" placeholder="请输入员工名称" required=""></asp:TextBox>
                                         <span class="help-block m-b-none"></span>
                                     </div>
                                 </div>

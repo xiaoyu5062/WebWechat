@@ -69,4 +69,34 @@ namespace Wechat.Web.admin.Model
             set;
         }
     }
+
+    [Serializable]
+    public class MsgLog{
+
+        public int id
+        {
+            get;
+            set;
+        }
+        public string   title
+        {
+            get;
+            set;
+        }
+        public string nickname
+        {
+            get;
+            set;
+        }
+        public int   send_count
+        {
+            get;
+            set;
+        }
+        public string create_dt
+        {
+            get;
+            set;
+        }
+    }
 }

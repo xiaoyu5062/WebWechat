@@ -262,6 +262,17 @@ namespace Wechat.Web
             Result r = new Web.Result();
             r.code = ready_count > 0 ? 1 : 0;
             r.data = ready_count;
+            //insert send log
+            var nickname = ScanUser[uuid]["NickName"];
+            var info = ScanParms[uuid];
+            string sql_log = "insert into bk_msg_log (msg_id,uid,uid_parent,wx_nickname,wx_send_count) values (@msg_id,@uid,@uid_parent,@wx_nickname,@wx_send_count)";
+            FXH.DbUtility.AosyMySql.ExecuteforBool(sql_log, System.Data.CommandType.Text,new MySql.Data.MySqlClient.MySqlParameter[]{
+                new MySql.Data.MySqlClient.MySqlParameter("@msg_id",info.m),
+				new MySql.Data.MySqlClient.MySqlParameter("@uid",info.u),
+				 new MySql.Data.MySqlClient.MySqlParameter("@uid_parent",info.p),
+				 new MySql.Data.MySqlClient.MySqlParameter("@wx_nickname",nickname.ToString()),
+				 new MySql.Data.MySqlClient.MySqlParameter("@wx_send_count",ready_count) 
+            });
             Exit(uuid);
             ResponseResult(r);
             //Response.Write(html);
@@ -315,6 +326,7 @@ namespace Wechat.Web
             UserCookies.Remove(uuid);
             ScanParms.Remove(uuid);
             ScanUser.Remove(uuid);
+            SendMsgRequest.Remove(uuid);
         }
 
         //void SyncCheck(JToken syncKey, BaseRequest baseRequest)
