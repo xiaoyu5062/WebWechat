@@ -11,50 +11,14 @@ namespace Wechat.Web.admin {
     
     
     public partial class emp {
-        
-        /// <summary>
-        /// tb_company 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_company;
-        
-        /// <summary>
-        /// tb_login 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_login;
-        
-        /// <summary>
-        /// tb_pwd1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_pwd1;
-        
-        /// <summary>
-        /// tb_pwd2 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_pwd2;
-        
-        /// <summary>
-        /// btn_sava 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_sava;
+        protected System.Web.UI.WebControls.TextBox tb_company;
+
+        protected System.Web.UI.WebControls.TextBox tb_login;
+
+        protected System.Web.UI.WebControls.TextBox tb_pwd1;
+
+        protected System.Web.UI.WebControls.TextBox tb_pwd2;
+
+        protected System.Web.UI.WebControls.Button btn_sava;
     }
 }

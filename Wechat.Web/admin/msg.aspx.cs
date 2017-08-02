@@ -13,9 +13,15 @@ namespace Wechat.Web.admin
 
         public List<Model.Message> list { get; set; }
         public Model.User self { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             self = admin.UserManager.UserSession[Context.User.Identity.Name];
+            if (self==null)
+            {
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                return;
+            }
             msg = "ok";
             if (!IsPostBack)
             {

@@ -11,6 +11,7 @@ namespace Wechat.Web.admin
     public partial class index : System.Web.UI.Page
     {
         public Model.User user { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request["a"] != null)

@@ -298,19 +298,18 @@
     <Content Include="static\js\jquery.js" />
     <Content Include="static\js\ladda.js" />
     <Content Include="static\js\spin.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="share.aspx" />
     <Content Include="admin\main.html" />
     <Content Include="login.html" />
-    <Content Include="admin\msg.aspx" />
+    <Content Include="admin\Msg.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\emp.aspx.cs">
       <DependentUpon>emp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\emp.aspx.designer.cs">
-      <DependentUpon>emp.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\company.aspx.cs">
       <DependentUpon>company.aspx</DependentUpon>
@@ -331,6 +330,7 @@
       <DependentUpon>api.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="admin\emp.aspx.designer.cs" />
     <Compile Include="FYHttpHelper.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -355,11 +355,12 @@
     <Compile Include="share.aspx.designer.cs">
       <DependentUpon>share.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\msg.aspx.cs">
-      <DependentUpon>msg.aspx</DependentUpon>
+    <Compile Include="admin\Msg.aspx.cs">
+      <DependentUpon>Msg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\msg.aspx.designer.cs">
-      <DependentUpon>msg.aspx</DependentUpon>
+    <Compile Include="admin\Msg.aspx.designer.cs">
+      <DependentUpon>Msg.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\UserManager.cs" />
   </ItemGroup>

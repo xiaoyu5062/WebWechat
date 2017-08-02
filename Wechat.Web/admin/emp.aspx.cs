@@ -37,6 +37,7 @@ namespace Wechat.Web.admin
 
         protected void btn_sava_Click(object sender, EventArgs e)
         {
+            
             var company = tb_company.Text;
             var login = tb_login.Text;
             var pwd = tb_pwd1.Text;
@@ -47,6 +48,12 @@ namespace Wechat.Web.admin
             }
             else
             {
+                string checkuser = "select count(1) from bk_user where login='" + login + "'";
+                if (int.Parse(FXH.DbUtility.AosyMySql.ExecuteScalar(checkuser).ToString()) > 0) {
+                    msg = "账号已被注册，请使用其它账号";
+                    return;
+                }
+
                 pwd = ZFY.FYCommon.GetMD5(pwd);
                 string sql = string.Format("select id,exp_dt from bk_user where login='{0}'", Context.User.Identity.Name);
                 var dt = FXH.DbUtility.AosyMySql.ExecuteforDataSet(sql).Tables[0];

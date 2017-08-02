@@ -45,14 +45,28 @@ namespace Wechat.Web
             if (!IsPostBack)
             {
                 show = true;
-                if (Request["i"] == null)
+                if (Request["u"] == null||Request["p"]==null||Request["m"]==null)
                 {
                     show = false;
                 }
-               
-               
-                title = "cedcdcdcdc";
-                content = "这里是活动内容";
+                try {
+                    string sql = "select * from bk_msg where id=" + int.Parse(Request["m"]);
+                    var dt = FXH.DbUtility.AosyMySql.ExecuteforDataSet(sql).Tables[0];
+                    if (dt.Rows.Count > 0)
+                    {
+                        title = dt.Rows[0]["title"].ToString();
+                        content =dt.Rows[0]["content"].ToString();
+                    }
+                    else {
+                        show = false;
+                    }
+                   
+                }
+                catch
+                {
+                    show = false;
+                }
+             
                 
             }
         }

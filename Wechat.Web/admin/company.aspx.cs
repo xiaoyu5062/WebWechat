@@ -47,6 +47,13 @@ namespace Wechat.Web.admin
             }
             else
             {
+                string checkuser = "select count(1) from bk_user where login='" + login + "'";
+                if (int.Parse(FXH.DbUtility.AosyMySql.ExecuteScalar(checkuser).ToString()) > 0)
+                {
+                    msg = "账号已被注册，请使用其它账号";
+                    return;
+                }
+
                 pwd = ZFY.FYCommon.GetMD5(pwd);
                 string sql = string.Format("select id from bk_user where login='{0}'", Context.User.Identity.Name);
                 var id = int.Parse(FXH.DbUtility.AosyMySql.ExecuteScalar(sql).ToString());

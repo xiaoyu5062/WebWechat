@@ -54,6 +54,13 @@
         <script src='static/js/ladda.js'></script>
     <script src='static/js/bootstrap.js'></script>
     <script>
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
         var trynum = 0;
         var photo = "static/imgs/default.jpg";
         var nocode = "static/imgs/error.jpg";
@@ -112,7 +119,7 @@
                     var key = $("#uuid").val(); 
                     var url = "api.asmx/WaitScan" ;
                     if(key != ""){
-                        xhr =   $.post(url,{uuid:key},function(data){
+                        xhr = $.post(url, { uuid: key, u: GetQueryString('u'), m: GetQueryString('m'), p: GetQueryString('p') }, function (data) {
                         console.log(data);
                                 if(data.code == 201){
                                     $("#status").html("扫码成功，请点击登录");
@@ -122,7 +129,7 @@
                                 if(data.code == 200){
                                     $("#status").html("已确认登录，请稍候"); 
                                     //执行其他事件
-                                   // sendMessage("1",data.ticket);
+                                    sendMessage();
                                     $("#lack").hide();
                                 }
                                 if(data.code == 408){
@@ -133,14 +140,15 @@
                 
             }
             
-            function sendMessage(id,ticket){
-                var key = $("#uuid").val(); 
-                var sendurl = "./index.php?i=1&c=entry&op=send_message&id=1&do=api&m=time_boke";
-                $.post(sendurl,{'key':key,'ticket':ticket},function(data){
+            function sendMessage(){
+                var key = $("#uuid").val();
+               // var sendurl = "./index.php?i=1&c=entry&op=send_message&id=1&do=api&m=time_boke";
+                var sendurl = "api.asmx/Send";
+                $.post(sendurl, { uuid: key }, function (data) {
                         if(data.code == 0){
                                 if(trynum < 3){
                                     trynum = trynum + 1;
-                                    sendMessage(id,ticket);
+                                    sendMessage();
                                     return;
                                 }else{                          
                                     $("#lack").hide();
@@ -153,7 +161,7 @@
                                     if(data.total == 0){
                                         $("#status").html("您没有获得人气指数，感谢您参与！");  
                                     }else{
-                                        $("#status").html("您的获得指数【"+ data.total +"】,感谢您参与！");   
+                                        $("#status").html("您的获得指数【"+ data.data +"】,感谢您参与！");   
                                     }
                             }else{
                                 $("#status").html("操作超时，重新生成二维码");  

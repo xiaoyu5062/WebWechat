@@ -55,7 +55,7 @@ namespace ZFY
                 string responseData = string.Empty;
                 wReq.ContentType = "application/x-www-form-urlencoded";
                 //using (Stream rs = wReq.GetRequestStreamAsync().Result)
-                using (Stream rs = wReq.GetResponse().GetResponseStream())
+                using (Stream rs = wReq.GetRequestStream())
                 {
                     rs.Write(bs, 0, bs.Length);
                 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="emp.aspx.cs" Inherits="Wechat.Web.admin.Msg" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Msg.aspx.cs" Inherits="Wechat.Web.admin.Msg" %>
 
 <!DOCTYPE html>
 <html>
@@ -27,11 +27,12 @@
                     <li class="active">
                         <a data-toggle="tab" href="#tab-1" aria-expanded="true">消息管理</a>
                     </li>
-				    <% if(self.level!=2){ %>
+                    <% if (self.level != 2)
+                        { %>
                     <li class="">
                         <a data-toggle="tab" href="#tab-2" aria-expanded="false">添加消息 </a>
                     </li>
-						<% } %>
+                    <% } %>
                 </ul>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane active">
@@ -40,6 +41,7 @@
                                 <div class="col-sm-12">
                                     <div class="ibox float-e-margins">
                                         <div class="ibox-content">
+                                            <div id="msg"></div>
                                             <input type="text" class="form-control input-sm m-b-xs" id="filter"
                                                 placeholder="搜索表格...">
 
@@ -63,12 +65,14 @@
                                                             sb.Append(" <tr class=\"gradeX\">");
                                                             sb.Append("<td>" + item.id + "</td>");
                                                             sb.Append("<td>" + item.title + "</td>");
-                                                            sb.Append(" <td>"+item.content+"</td>");
-                                                            sb.Append(" <td class=\"center\">"+item.create_dt+"</td>");
-                                                            
+                                                            sb.Append(" <td>" + item.content + "</td>");
+                                                            sb.Append(" <td class=\"center\">" + item.create_dt + "</td>");
+
                                                             sb.Append(" <td class=\"center\">623</td>");
                                                             sb.Append("<td class=\"center\">1234321</td>");
-                                                            sb.Append(" <td class=\"center\"></td>");
+                                                            sb.Append(" <td class=\"center\">");
+                                                            sb.Append("<button class=\"btn btn-primary \" onclick=\"getlink(" + self.id + "," + self.parent_id + "," + item.id + ");\"  type=\"button\" id=\"copy_btn\"><i class=\"fa fa-check\"></i>&nbsp;生成链接</button>");
+                                                            sb.Append("</td>");
                                                         }
                                                     %>
                                                     <%=sb %>
@@ -104,7 +108,7 @@
                                         <span class="help-block m-b-none"></span>
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-sm-12 col-sm-offset-3">
                                     <asp:Button ID="btn_sava" OnClick="btn_sava_Click" runat="server" Text="保存" />
                                 </div>
@@ -124,6 +128,16 @@
     <script src="js/plugins/footable/footable.all.min.js"></script>
     <script src="js/content.min.js?v=1.0.0"></script>
     <script>
+        function getlink(u, p, m) {
+            var msg = document.getElementById("msg");
+            var str = "<div class=\"alert alert-info alert-dismissable\" id=\"alert_msg\"> <button aria-hidden=\"true\" data-dismiss=\"alert\" class=\"close\" type=\"button\">×</button>";
+            var url = "http://"+location.host + "/share.aspx?u=" + u + "&p=" + p + "&m=" + m;
+            str += url
+            str += "</br><a class=\"alert-link\" target='_bank' href=\"" + url + "\">点击预览</a>."
+            str += "</div>";
+            msg.innerHTML = str;
+
+        }
         $(document).ready(function () {
 
             $(".footable").footable();
@@ -131,6 +145,8 @@
             if (msg != "ok") {
                 alert(msg);
             }
+
+
         });
     </script>
 </body>
