@@ -38,8 +38,8 @@ namespace Wechat.Web
                     admin.UserManager.UserSession.Add(username, user);
                 }
                 FormsAuthentication.SetAuthCookie(username, false);
-                Response.Redirect("admin/index.aspx");
-               // FormsAuthentication.RedirectFromLoginPage(username, false);
+               // Response.Redirect("admin/index.aspx");
+                FormsAuthentication.RedirectFromLoginPage(username, false);
             }
             else
             {

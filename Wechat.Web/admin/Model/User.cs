@@ -98,5 +98,6 @@ namespace Wechat.Web.admin.Model
             get;
             set;
         }
+        public string username { get; set; }
     }
 }

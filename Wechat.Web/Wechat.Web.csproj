@@ -1,9 +1,11 @@
-﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion></ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <ProjectGuid>{90F17AC1-BAA2-4EA0-B1AB-25D3E87B9300}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
@@ -67,6 +69,7 @@
     <Content Include="admin\emp.aspx" />
     <Content Include="admin\company.aspx" />
     <Content Include="admin\index.aspx" />
+    <Content Include="admin\main.aspx" />
     <Content Include="api.asmx" />
     <Content Include="admin\css\animate.min.css" />
     <Content Include="admin\css\bootstrap.min.css" />
@@ -169,8 +172,6 @@
     <Content Include="admin\img\success.png" />
     <Content Include="admin\img\user.png" />
     <Content Include="admin\img\wenku_logo.png" />
-    <Content Include="index.aspx" />
-    <Content Include="admin\index.html" />
     <Content Include="admin\js\bootstrap.min.js" />
     <Content Include="admin\js\contabs.min.js" />
     <Content Include="admin\js\content.min.js" />
@@ -299,8 +300,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="share.aspx" />
-    <Content Include="admin\main.html" />
-    <Content Include="login.html" />
     <Content Include="admin\Msg.aspx" />
     <Content Include="admin\msglog.aspx" />
   </ItemGroup>
@@ -324,19 +323,19 @@
     <Compile Include="admin\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\main.aspx.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\main.aspx.designer.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\Model\User.cs" />
     <Compile Include="api.asmx.cs">
       <DependentUpon>api.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FYHttpHelper.cs" />
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -390,6 +389,7 @@
     <Content Include="admin\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="admin\js\plugins\jqgrid\i18n\grid.locale-cn.js0820" />
     <Content Include="admin\js\plugins\jqgrid\jquery.jqGrid.min.js0820" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -415,7 +415,8 @@
           <IISUrl>http://localhost:11492/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl></CustomServerUrl>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

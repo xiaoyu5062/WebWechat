@@ -61,7 +61,7 @@
                         </li>-->
 
                     <li>
-                        <a class="J_menuItem" href="main.html">
+                        <a class="J_menuItem" href="main.aspx">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
                             <!--<span class="fa arrow"></span>-->
@@ -94,9 +94,9 @@
                     <li>
                         <a class="J_menuItem" href="msglog.aspx"><i class="fa fa-send"></i><span class="nav-label">发送记录</span></a>
                     </li>
-                    <li>
+                   <!-- <li>
                         <a class="J_menuItem" href="layouts5.html"><i class="fa fa-cog"></i><span class="nav-label">系统设置</span></a>
-                    </li>
+                    </li>-->
 
                 </ul>
             </div>
@@ -118,7 +118,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用爆客系统</span>
+                            <span class="m-r-sm text-muted welcome-message"><a href="index.aspx" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用爆客系统</span>
                         </li>
 
                         <li>
@@ -137,7 +137,7 @@
                 </button>
                 <nav class="page-tabs J_menuTabs">
                     <div class="page-tabs-content">
-                        <a href="javascript:;" class="active J_menuTab" data-id="main.html">首页</a>
+                        <a href="javascript:;" class="active J_menuTab" data-id="main.aspx">首页</a>
                     </div>
                 </nav>
                 <button class="roll-nav roll-right J_tabRight">
@@ -161,7 +161,7 @@
 
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="main.html" frameborder="0" data-id="main.html" seamless></iframe>
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="main.aspx" frameborder="0" data-id="main.aspx" seamless></iframe>
             </div>
             <div class="footer">
                 <div class="pull-right">

@@ -48,6 +48,7 @@ namespace Wechat.Web
                 if (Request["u"] == null||Request["p"]==null||Request["m"]==null)
                 {
                     show = false;
+                    return;
                 }
                 try {
                     string sql = "select * from bk_msg where id=" + int.Parse(Request["m"]);

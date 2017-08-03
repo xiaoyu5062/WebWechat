@@ -8,8 +8,19 @@ namespace Wechat.Web.admin
         public string msg { get; set; }
 
         public List<Model.User> list { get; set; }
+
+        public Model.User self { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                self = UserManager.UserSession[Context.User.Identity.Name];
+            }
+            catch
+            {
+                System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                return;
+            }
             msg = "ok";
             if (!IsPostBack)
             {
@@ -24,8 +35,17 @@ namespace Wechat.Web.admin
             }
         }
 
-        void GetUsers() {
-            string sql = string.Format("select * from bk_user where level=2 and parent_id=(select id from bk_user where login='{0}')", Context.User.Identity.Name);
+        void GetUsers()
+        {
+            string sql = string.Empty;
+            if (self.level == -1)
+            {
+                sql = string.Format("select * from bk_user ");
+            }
+            else if (self.level == 1 || self.level == 3)
+            {
+                sql = string.Format("select * from bk_user where parent_id={0}", self.id);
+            }
             var dt = FXH.DbUtility.AosyMySql.ExecuteforDataSet(sql).Tables[0];
             list = ZFY.DataExtensions.ToList<Model.User>(dt);
             ViewState["list"] = list;
@@ -33,7 +53,7 @@ namespace Wechat.Web.admin
 
         protected void btn_sava_Click(object sender, EventArgs e)
         {
-            
+
             var company = tb_company.Text;
             var login = tb_login.Text;
             var pwd = tb_pwd1.Text;
@@ -45,7 +65,8 @@ namespace Wechat.Web.admin
             else
             {
                 string checkuser = "select count(1) from bk_user where login='" + login + "'";
-                if (int.Parse(FXH.DbUtility.AosyMySql.ExecuteScalar(checkuser).ToString()) > 0) {
+                if (int.Parse(FXH.DbUtility.AosyMySql.ExecuteScalar(checkuser).ToString()) > 0)
+                {
                     msg = "账号已被注册，请使用其它账号";
                     return;
                 }
@@ -54,8 +75,16 @@ namespace Wechat.Web.admin
                 string sql = string.Format("select id,exp_dt from bk_user where login='{0}'", Context.User.Identity.Name);
                 var dt = FXH.DbUtility.AosyMySql.ExecuteforDataSet(sql).Tables[0];
                 int id = int.Parse(dt.Rows[0]["id"].ToString());
-                string exp_dt = dt.Rows[0]["exp_dt"].ToString();
-                sql = "insert into bk_user (login,pwd,username,level,parent_id,exp_dt) values (@login,@pwd,@username,2,@parent_id,@exp_dt)";
+                string exp_dt = string.Empty;
+                if (self.level == 1 || self.level == 3)
+                {
+                    exp_dt = dt.Rows[0]["exp_dt"].ToString();
+                }
+                else if (self.level == -1)
+                {
+                    exp_dt = DateTime.Now.AddYears(1).ToString();
+                }
+                sql = string.Format("insert into bk_user (login,pwd,username,level,parent_id,exp_dt) values (@login,@pwd,@username,{0},@parent_id,@exp_dt)", self.level == -1 ? 0 : 2);
                 bool r = FXH.DbUtility.AosyMySql.ExecuteforBool(sql, System.Data.CommandType.Text, new MySql.Data.MySqlClient.MySqlParameter[] {
                     new MySql.Data.MySqlClient.MySqlParameter ("@login",login),
                     new MySql.Data.MySqlClient.MySqlParameter ("@pwd",pwd),

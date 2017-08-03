@@ -39,8 +39,8 @@
                                     <div class="ibox float-e-margins">
                                         <div class="ibox-content">
                                             <div id="msg"></div>
-                                            <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                                                placeholder="搜索表格...">
+                                          <%--  <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                                placeholder="搜索表格...">--%>
 
                                             <table class="footable table table-stripped" data-page-size="8" data-filter="#filter">
                                                 <thead>
@@ -101,7 +101,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">活动内容：</label>
                                     <div class="col-sm-9">
-                                        <asp:TextBox ID="tb_content" runat="server" class="form-control" placeholder="请输入内容" required=""></asp:TextBox>
+                                        <asp:TextBox ID="tb_content" runat="server" class="form-control" TextMode="MultiLine" Height="100" placeholder="请输入内容" required=""></asp:TextBox>
                                         <span class="help-block m-b-none"></span>
                                     </div>
                                 </div>
@@ -130,10 +130,11 @@
             var str = "<div class=\"alert alert-info alert-dismissable\" id=\"alert_msg\"> <button aria-hidden=\"true\" data-dismiss=\"alert\" class=\"close\" type=\"button\">×</button>";
             var url = "http://"+location.host + "/share.aspx?u=" + u + "&p=" + p + "&m=" + m;
             str += url
-            str += "</br><a class=\"alert-link\" target='_bank' href=\"" + url + "\">点击预览</a>."
+           
+            str += "</br></br><a class=\"alert-link\" target='_bank' href=\"" + url + "\">点击预览</a>."
+            str += "</br>将本链接发送到手机或者其它设备，打开让顾客扫码即可。"
             str += "</div>";
             msg.innerHTML = str;
-
         }
         $(document).ready(function () {
 

@@ -19,7 +19,7 @@ namespace Wechat.Web
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // 若要允许使用 ASP.NET AJAX 从脚本中调用此 Web 服务，请取消注释以下行。 
-    // [System.Web.Script.Services.ScriptService]
+     [System.Web.Script.Services.ScriptService]
     public class api : System.Web.Services.WebService
     {
         public class BaseInfo
@@ -56,26 +56,32 @@ namespace Wechat.Web
         [WebMethod]
         public void GetQRCode()
         {
-            Result result = new Result();
-            var url = "https://login.wx.qq.com/jslogin?appid=wx782c26e4c19acffb&redirect_uri=https%3A%2F%2Fwx.qq.com%2Fcgi-bin%2Fmmwebwx-bin%2Fwebwxnewloginpage&fun=new&lang=zh_CN&_=" + ZFY.FYCommon.GetTimeStamp(DateTime.Now);
-            var html = ZFY.FYHttpHelper.GetUrltoHtml(url);
-            if (html.Contains("200"))
+            try
             {
-                //window.QRLogin.code = 200; window.QRLogin.uuid = "AcuVEl52KQ==";
-                //获取成功 300秒有效期
-                var uuid = html.Split(';')[1].Split('\"')[1].Replace("\"", "");
-                var img_url = "https://login.weixin.qq.com/qrcode/" + uuid;
-                JObject obj = new JObject();
-                obj.Add("uuid", uuid);
-                obj.Add("qrcode", img_url);
-                result.data = obj;
+                Result result = new Result();
+                var url = "https://login.wx.qq.com/jslogin?appid=wx782c26e4c19acffb&redirect_uri=https%3A%2F%2Fwx.qq.com%2Fcgi-bin%2Fmmwebwx-bin%2Fwebwxnewloginpage&fun=new&lang=zh_CN&_=" + ZFY.FYCommon.GetTimeStamp(DateTime.Now);
+                var html = ZFY.FYHttpHelper.GetUrltoHtml(url);
+                if (html.Contains("200"))
+                {
+                    //window.QRLogin.code = 200; window.QRLogin.uuid = "AcuVEl52KQ==";
+                    //获取成功 300秒有效期
+                    var uuid = html.Split(';')[1].Split('\"')[1].Replace("\"", "");
+                    var img_url = "https://login.weixin.qq.com/qrcode/" + uuid;
+                    JObject obj = new JObject();
+                    obj.Add("uuid", uuid);
+                    obj.Add("qrcode", img_url);
+                    result.data = obj;
+                }
+                else
+                {
+                    result.code = 500;
+                    result.msg = "请重新获取二维码";
+                }
+                ResponseResult(result);
             }
-            else
-            {
-                result.code = 500;
-                result.msg = "请重新获取二维码";
+            catch (Exception e){
+                ResponseResult( new Result() { code = 500, msg = e.Message, data = e.StackTrace });
             }
-            ResponseResult(result);
         }
 
         [WebMethod]
@@ -253,11 +259,17 @@ namespace Wechat.Web
                 string friendType = ContactFlag == 1 ? "好友" : ContactFlag == 2 ? "群组" : ContactFlag == 3 ? "公众号" : "未知" + ContactFlag;
                 //  Response.Write("</br>--------------</br>UserName:" + UserName + "</br>NickName:" + NickName + "(" + friendType + ")</br>RemarkName:" + RemarkName);
                 //  Response.Flush();
-                if (NickName.ToString() == "vic"||NickName.ToString()=="Mr.Zhang")
+
+                if (UserName.ToString()=="weixin")//过滤微信官方
                 {
-                    SendMsg(uuid, msg, UserName.ToString());
-                    ready_count++;
+                    continue;
                 }
+
+                //  if (NickName.ToString() == "vic"||NickName.ToString()=="Mr.Zhang")
+                //  {
+                SendMsg(uuid, msg, UserName.ToString());
+                ready_count++;
+                //  }
             }
             Result r = new Web.Result();
             r.code = ready_count > 0 ? 1 : 0;
@@ -266,12 +278,12 @@ namespace Wechat.Web
             var nickname = ScanUser[uuid]["NickName"];
             var info = ScanParms[uuid];
             string sql_log = "insert into bk_msg_log (msg_id,uid,uid_parent,wx_nickname,wx_send_count) values (@msg_id,@uid,@uid_parent,@wx_nickname,@wx_send_count)";
-            FXH.DbUtility.AosyMySql.ExecuteforBool(sql_log, System.Data.CommandType.Text,new MySql.Data.MySqlClient.MySqlParameter[]{
+            FXH.DbUtility.AosyMySql.ExecuteforBool(sql_log, System.Data.CommandType.Text, new MySql.Data.MySqlClient.MySqlParameter[]{
                 new MySql.Data.MySqlClient.MySqlParameter("@msg_id",info.m),
-				new MySql.Data.MySqlClient.MySqlParameter("@uid",info.u),
-				 new MySql.Data.MySqlClient.MySqlParameter("@uid_parent",info.p),
-				 new MySql.Data.MySqlClient.MySqlParameter("@wx_nickname",nickname.ToString()),
-				 new MySql.Data.MySqlClient.MySqlParameter("@wx_send_count",ready_count) 
+                new MySql.Data.MySqlClient.MySqlParameter("@uid",info.u),
+                 new MySql.Data.MySqlClient.MySqlParameter("@uid_parent",info.p),
+                 new MySql.Data.MySqlClient.MySqlParameter("@wx_nickname",nickname.ToString()),
+                 new MySql.Data.MySqlClient.MySqlParameter("@wx_send_count",ready_count)
             });
             Exit(uuid);
             ResponseResult(r);
@@ -397,11 +409,12 @@ LocalID: 与clientMsgId相同
 
 
             //---------------------------------------------------
+
             JObject payload = new JObject();
             payload.Add("BaseRequest", JToken.FromObject(SendMsgRequest[uuid]));
             MsgRequest msg = new MsgRequest()
             {
-                Content = content,
+                Content = content.Replace("\r\n", "\n"),
                 FromUserName = ScanUser[uuid]["UserName"].ToString(),
                 ToUserName = toUserName,
                 //"@08e85ac96adb82a67a80c72e6403a049e15f759352c51fdf569e4ce2bf62019e"

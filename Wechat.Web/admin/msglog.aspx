@@ -43,9 +43,14 @@
                                                     <tr>
                                                         <th>编号</th>
                                                         <th>消息标题</th>
+                                                         <%if (user.level != 0 && user.level != 2)
+                                                            { %>
+                                                          <th>引导员</th>
+                                                        <%} %>
                                                         <th>发送者</th>
                                                         <th>爆光量</th>
 													    <th>发送时间</th>
+                                                       
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -56,10 +61,14 @@
                                                             sb.Append(" <tr class=\"gradeX\">");
                                                             sb.Append("<td>" + item.id + "</td>");
                                                             sb.Append("<td>" + item.title + "</td>");
+                                                            if (user.level != 0 && user.level != 2)
+                                                            {
+                                                                sb.Append("<td class=\"center\">" + item.username + "</td>");
+                                                            }
                                                             sb.Append(" <td>" + item.nickname + "</td>");
                                                             sb.Append(" <td class=\"center\">" + item.send_count + "</td>");
                                                             sb.Append(" <td class=\"center\">" + item.create_dt+ "</td>");
-                                                          }
+                                                        }
                                                     %>
                                                     <%=sb %>
                                                 </tbody>

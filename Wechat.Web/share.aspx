@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>裂变系统</title>
+    <title>爆客系统</title>
     <link rel="stylesheet" href="static/css/bootstrap.css">
         <link rel="stylesheet" href="static/css/ladda.css">
         <link rel="stylesheet" href="static/css/common.css">  

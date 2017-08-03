@@ -25,10 +25,12 @@
             <div class="tabs-container">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a data-toggle="tab" href="#tab-1" aria-expanded="true">员工管理</a>
+                        <a data-toggle="tab" href="#tab-1" aria-expanded="true"><%if (self.level == -1) {%>商户管理<%}
+    else{ %>员工管理<%} %></a>
                     </li>
                     <li class="">
-                        <a data-toggle="tab" href="#tab-2" aria-expanded="false">添加员工 </a>
+                        <a data-toggle="tab" href="#tab-2" aria-expanded="false"><%if (self.level == -1) {%>添加商户<%}
+    else{ %>添加员工<%} %> </a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -44,8 +46,8 @@
                                             <table class="footable table table-stripped" data-page-size="8" data-filter="#filter">
                                                 <thead>
                                                     <tr>
-                                                        <th>员工编号</th>
-                                                        <th>员工名称</th>
+                                                        <th>编号</th>
+                                                        <th>姓名</th>
                                                         <th>到期时间</th>
                                                         <th>剩余点数</th>
                                                         <th>爆客次数</th>
@@ -89,9 +91,9 @@
                         <div class="panel-body">
                             <form runat="server">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">员工名称：</label>
+                                    <label class="col-sm-3 control-label">姓名：</label>
                                     <div class="col-sm-9">
-                                        <asp:TextBox ID="tb_company" runat="server" class="form-control" placeholder="请输入员工名称" required=""></asp:TextBox>
+                                        <asp:TextBox ID="tb_company" runat="server" class="form-control" placeholder="请输入名称" required=""></asp:TextBox>
                                         <span class="help-block m-b-none"></span>
                                     </div>
                                 </div>
