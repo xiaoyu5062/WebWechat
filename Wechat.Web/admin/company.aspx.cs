@@ -81,4 +81,21 @@ namespace Wechat.Web.admin
             }
         }
     }
+
+
+    public partial class company
+    {
+
+
+        protected global::System.Web.UI.WebControls.TextBox tb_company;
+
+ 
+        protected global::System.Web.UI.WebControls.TextBox tb_login;
+        
+        protected global::System.Web.UI.WebControls.TextBox tb_pwd1;
+
+        protected global::System.Web.UI.WebControls.TextBox tb_pwd2;
+
+        protected global::System.Web.UI.WebControls.Button btn_sava;
+    }
 }

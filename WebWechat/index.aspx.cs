@@ -148,6 +148,7 @@ namespace WebWechat
             //StreamReader sr = new StreamReader(wRes.GetResponseStream());
             //var html = sr.ReadToEnd();
             var html = ZFY.FYHttpHelper.PostUrltoHtml(url, payloadStr, cookies);
+          //  Response.Write("</br>-----------</br>webwxinit Result:" + html.ToString());
             JObject json = JObject.Parse(html);
             /*BaseResponse": { "Ret": 0, "ErrMsg": "" } */
             //if (html.Contains("\"BaseResponse\":{\"Ret\":0,\"ErrMsg\":\"\"}"))
@@ -161,8 +162,9 @@ namespace WebWechat
             // Response.Flush();
             VAL_Self = json["User"];
             Response.Write("</br>初始化完成。</br>用户信息:</br>UserName:" + VAL_Self["UserName"] + "</br>NickName:" + VAL_Self["NickName"]);
+            StatusNotify();
             SyncCheck((JObject)json["SyncKey"]);
-            GetFriends();
+           // GetFriends();
             // SendMsg();
         }
 
@@ -196,10 +198,10 @@ namespace WebWechat
                 string friendType = ContactFlag == 1 ? "好友" : ContactFlag == 2 ? "群组" : ContactFlag == 3 ? "公众号" : "未知" + ContactFlag;
                 Response.Write("</br>--------------</br>UserName:" + UserName + "</br>NickName:" + NickName + "(" + friendType + ")</br>RemarkName:" + RemarkName);
                 Response.Flush();
-                if (NickName.ToString() == "vic")
-                {
-                    SendMsg("我是自动发送的", UserName.ToString());
-                }
+                //if (NickName.ToString() == "vic")
+                //{
+                //    SendMsg("我是自动发送的", UserName.ToString());
+                //}
             }
             //Response.Write(html);
             //Response.Flush();
@@ -304,6 +306,36 @@ LocalID: 与clientMsgId相同
             var html = sr.ReadToEnd();
             Response.Write(html);
         }
+    
+        void StatusNotify() {
+            //https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxstatusnotify?pass_ticket=nwwSfDCKJajl2FMCvkyrVQ8vUUr5FihG92QHvzPBbyH7SeBARjO6S%252FJ87EEWRF9q
+            string url = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxstatusnotify?pass_ticket={0}",pass_ticket);
+            JObject data = new JObject();
+            JObject baseRequest = new JObject();
+            baseRequest.Add("Sid", VAL_baseRequest.Sid);
+            baseRequest.Add("Skey", VAL_baseRequest.Skey);
+            baseRequest.Add("Uin", VAL_baseRequest.Uin);
+            baseRequest.Add("DeviceID", VAL_baseRequest.DeviceID);
+            data.Add("BaseRequest", baseRequest);
+            data.Add("ClientMsgId", ZFY.FYCommon.GetTimeStamp(DateTime.Now));
+            data.Add("Code", 3);
+            data.Add("FromUserName", VAL_Self["UserName"]);
+            data.Add("ToUserName", VAL_Self["UserName"]);
+            HttpWebRequest wReq_msg = (HttpWebRequest)System.Net.WebRequest.Create(url);
+            wReq_msg.CookieContainer = cookies;
+            wReq_msg.Method = "POST";
+            var data_str = data.ToString().Replace("\r\n","");
+            byte[] data_b = System.Text.Encoding.UTF8.GetBytes(data_str);
+            using (Stream stream = wReq_msg.GetRequestStream())
+            {
+                stream.Write(data_b, 0, data_b.Length);
+            }
+            var wRes_msg = wReq_msg.GetResponse();
+            StreamReader srr = new StreamReader(wRes_msg.GetResponseStream());
+            var msg_result = srr.ReadToEnd();
+            Response.Write("</br>------------------</br>StatusNotify Result:" + msg_result.ToString());
+            Response.Flush();
+        }
 
         void SyncCheck(JObject syncKey)
         {
@@ -314,15 +346,17 @@ LocalID: 与clientMsgId相同
                 synckey += item["Key"] + "_" + item["Val"] + "|";
             }
             synckey = synckey.Substring(0, synckey.Length - 1);
-            System.Threading.Thread thread = new System.Threading.Thread(() =>
-            {
+           // System.Threading.Thread thread = new System.Threading.Thread(() =>
+           // {
                 //https://webpush.wx.qq.com/cgi-bin/mmwebwx-bin/synccheck?r=1501042097300&skey=%40crypt_fa8c7d22_a72311e1a87a045893d475b18968c70c&sid=T1VVW9p0%2BFwu0%2B%2BB&uin=752194140&deviceid=e133973973929944&synckey=1_675439007%7C2_675439150%7C3_675439136%7C11_675439098%7C13_675340098%7C201_1501042054%7C1000_1501030261%7C1001_1501030292%7C1002_1500889686&_=1501041063253
-                System.Threading.Thread.Sleep(25000);
+                //System.Threading.Thread.Sleep(25000);
                 string ts = ZFY.FYCommon.GetTimeStamp(DateTime.Now);
                 long r = long.Parse(ts) - time;
                 while (true)
                 {
-                    string url = string.Format("https://webpush.wx.qq.com/cgi-bin/mmwebwx-bin/synccheck?r={0}&skey={1}&sid={2}&uin={3}&deviceid={4}&synckey={5}", ts, skey, sid, uin, deviceID, synckey);
+                Response.Write("</br>-----------</br>SyncCheck..");
+                Response.Flush();
+                string url = string.Format("https://webpush.wx.qq.com/cgi-bin/mmwebwx-bin/synccheck?r={0}&skey={1}&sid={2}&uin={3}&deviceid={4}&synckey={5}", ts, skey, sid, uin, deviceID, synckey);
                     //  var html = ZFY.FYHttpHelper.GetUrltoHtml(url,cookie:cookies);
                     HttpWebRequest wReq = (HttpWebRequest)System.Net.WebRequest.Create(url);
                     wReq.CookieContainer = cookies;
@@ -335,15 +369,71 @@ LocalID: 与clientMsgId相同
                     var wRes = wReq.GetResponse();
                     StreamReader sr = new StreamReader(wRes.GetResponseStream());
                     var html = sr.ReadToEnd();
-                    //Response.Write("</br>heart.." + html);
-                    //Response.Flush();
+                    Response.Write("</br>SyncCheck Result:" + html.ToString());
+                    Response.Flush();
                     Debug.WriteLine(html);
-                    System.Threading.Thread.Sleep(25000);
-                }
+                #region 有新消息就获取新的消息 
+                // window.synccheck ={ retcode: "0",selector: "2"}
+                if (html.Replace(" ","").Contains("selector:\"2\""))
+                {
+                    Response.Write("</br>GetMsg...");
 
-            });
-            thread.IsBackground = true;
-            thread.Start();
+                    // https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid=R3KUjSroxAFf56hQ&skey=@crypt_fa8c7d22_e888506342251246dac2b61fbb3e1369&pass_ticket=nwwSfDCKJajl2FMCvkyrVQ8vUUr5FihG92QHvzPBbyH7SeBARjO6S%252FJ87EEWRF9q
+                    string url_msg = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid={0}&skey={1}&pass_ticket={2}", sid, skey, pass_ticket);
+                    JObject data = new JObject();
+                    JObject baseRequest = new JObject();
+                    baseRequest.Add("Sid", VAL_baseRequest.Sid);
+                    baseRequest.Add("Skey", VAL_baseRequest.Skey);
+                    baseRequest.Add("Uin", VAL_baseRequest.Uin);
+                    baseRequest.Add("DeviceID", VAL_baseRequest.DeviceID);
+                    data.Add("BaseRequest",baseRequest);
+                    data.Add("SyncKey", syncKey);
+                    data.Add("rr", long.Parse(ZFY.FYCommon.GetTimeStamp(DateTime.Now)) - time);
+                    var data_str = data.ToString().Replace("\r\n","");
+                    HttpWebRequest wReq_msg = (HttpWebRequest)System.Net.WebRequest.Create(url_msg);
+                    wReq_msg.CookieContainer = cookies;
+                    wReq_msg.Method = "POST";
+                    byte[] data_b = System.Text.Encoding.UTF8.GetBytes(data_str);
+                    using (Stream stream = wReq_msg.GetRequestStream())
+                    {
+                        stream.Write(data_b, 0, data_b.Length);
+                    }
+                    var wRes_msg = wReq_msg.GetResponse();
+                    StreamReader srr = new StreamReader(wRes_msg.GetResponseStream());
+                   var msg_result = srr.ReadToEnd();
+                   // Response.Write("</br>GetMsg Result:" + msg_result.ToString());
+                    Response.Flush();
+                    JObject json = JObject.Parse(msg_result);
+                    //新消息数量
+                    int AddMsgCount = (int)json["AddMsgCount"];
+                    if (AddMsgCount > 0)
+                    {
+                        var AddMsgList = json["AddMsgList"].Children();
+                        foreach (var item in AddMsgList)
+                        {
+                            Response.Write("</br>----收到消息---</br>FromUserName:" + item["FromUserName"] + "</br>MsgType:" + item["MsgType"] + "</br>Content:" + item["Content"]);
+                            Response.Flush();
+                        }
+                    }
+                    else {
+                        Response.Write("</br>AddMsgCount=0,无新增消息");
+                        Response.Flush();
+                    }
+                    VAL_SyncKey = syncKey=(JObject)json["SyncKey"];
+                     synckey = string.Empty;
+                    foreach (var item in syncKey["List"].Children())
+                    {
+                        synckey += item["Key"] + "_" + item["Val"] + "|";
+                    }
+                    synckey = synckey.Substring(0, synckey.Length - 1);
+                }
+                #endregion
+                //System.Threading.Thread.Sleep(25000);
+            }
+
+            // });
+            //  thread.IsBackground = true;
+            // thread.Start();
         }
     }
 }

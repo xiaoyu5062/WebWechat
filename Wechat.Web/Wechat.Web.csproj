@@ -313,9 +313,6 @@
       <DependentUpon>company.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\company.aspx.designer.cs">
-      <DependentUpon>company.aspx</DependentUpon>
-    </Compile>
     <Compile Include="admin\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
