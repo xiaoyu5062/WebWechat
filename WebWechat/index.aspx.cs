@@ -5,7 +5,7 @@ using System.Xml;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
-
+using HtmlAgilityPack;
 namespace WebWechat
 {
     public partial class index : System.Web.UI.Page
@@ -162,10 +162,13 @@ namespace WebWechat
             // Response.Flush();
             VAL_Self = json["User"];
             Response.Write("</br>初始化完成。</br>用户信息:</br>UserName:" + VAL_Self["UserName"] + "</br>NickName:" + VAL_Self["NickName"]);
-            StatusNotify();
+           // StatusNotify();
+
+           
             SyncCheck((JObject)json["SyncKey"]);
-           // GetFriends();
+            // GetFriends();
             // SendMsg();
+           
         }
 
         void GetFriends()
@@ -434,6 +437,58 @@ LocalID: 与clientMsgId相同
             // });
             //  thread.IsBackground = true;
             // thread.Start();
+        }
+
+        void CheckDomain(string target_url)
+        {
+           
+
+            //SendMsg(domain, VAL_Self["UserName"].ToString());
+
+            //https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl=http%3A%2F%2Fledianduo.com&skey=%40crypt_fa8c7d22_25b7297daaed63d602e8460d04c5f0de&deviceid=e676044223279346&pass_ticket=Jm%252B%252F3k%252FtBS9%252FUdRl008%252BAqQdOmsbZHnqyBTAZImRVzH1hBhcadZK%252FNaTYWzvTiro&opcode=2&scene=1&username=@fc53dde3492a64ad3c8ba6f935b62f11
+            //https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl=http%3a%2f%2fledianduo.com&skey=%40crypt_fa8c7d22_260e586fc827b0858789c26b4c8acdb6&deviceid=e000373749172002&pass_ticket=6bEqeQYjdbEOXvNhP0snBUcUY6lu4t4GOpvzvRk8xJkyhqaIqUGa%252BPCwL0VmED2W&opcode=2&scene=1&username=@a43304c52e013ebbd260622695b9f96a
+            string url = string.Format("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxcheckurl?requrl={0}&skey={1}&deviceid={4}&pass_ticket={2}&opcode=2&scene=1&username={3}", target_url, skey, pass_ticket, VAL_Self["UserName"].ToString(),deviceID);
+            Response.Write("</br>--------------</br>检测域名："+ target_url);
+            Response.Flush();
+            var req = (HttpWebRequest)WebRequest.Create(url);
+            req.Method = "GET";
+            req.Host = "wx.qq.com";
+            req.Headers["Upgrade-Insecure-Requests"] = "1";
+            req.UserAgent= "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36";
+            req.Referer = "https://wx.qq.com/";
+            req.CookieContainer = cookies;
+            /// 获取响应流  
+            var rsp = req.GetResponse() as HttpWebResponse; // 最好能捕获异常302的HttpException,然后再处理一下。在Data中取键值 Location  
+            StreamReader sr = new StreamReader(rsp.GetResponseStream());
+            var html = sr.ReadToEnd();
+            HtmlAgilityPack.HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            string result = "正常";
+            var reason= doc.DocumentNode.SelectSingleNode("//*[@id=\"reason\"]");
+            if (reason!=null)
+            {/*
+                var DATA = JSON.parse('{"retcode":0,"type":"gray","title":"将要访问","desc":"非微信官方网页，继续访问将转换成手机预览模式。","url":"http://ledianduo.cn","btns":[{"name":"继续访问","url":"http://support.weixin.qq.com/cgi-bin/mmsupport-bin/getpagedata?requrl=http%3A%2F%2Fledianduo.cn%3Fnsukey%3Dy3p4oBeCZMkahHhyuGGOwAsJCh9FBd3VB5G3FFsAzVGmm%252FEL796yscM6qLo5T9%252BYwrJV%252BnOjWIUB49d%252FnDT0WOQSlpy9EDqwWQJNDyRbbl4ltLktn5GNW1xsf7F8bFzlCPwFLKhBpdXtvtcAatOqg6%252FymIUcDpFnk%252FdjJNViJBdqpmd2xMlDpyA3UhPFqFix&t=favorites&ticket=Ymh0dHA6Ly9sZWRpYW5kdW8uY24%2FbnN1a2V5PXkzcDRvQmVDWk1rYWhIaHl1R0dPd0FzSkNoOUZCZDNWQjVHM0ZGc0F6VkdtbSUyRkVMNzk2eXNjTTZxTG81VDklMkJZd3JKViUyQm5PaldJVUI0OWQlMkZuRFQwV09RU2xweTlFRHF3V1FKTkR5UmJibDRsdExrdG41R05XMXhzZjdGOGJGemxDUHdGTEtoQnBkWHR2dGNBYXRPcWc2JTJGeW1JVWNEcEZuayUyRmRqSk5WaUpCZHFwbWQyeE1sRHB5QTNVaFBGcUZpeA%3D%3D"}],"links":[{"name":"申请恢复","url":"https://weixin110.qq.com/security/newreadtemplate?t=webpage_intercept/w_form&url=http%3A%2F%2Fledianduo.cn&blocktype=1#wechat_redirect"},{"name":"访问原网页","url":"http://ledianduo.cn?nsukey=y3p4oBeCZMkahHhyuGGOwAsJCh9FBd3VB5G3FFsAzVGmm%2FEL796yscM6qLo5T9%2BYwrJV%2BnOjWIUB49d%2FnDT0WOQSlpy9EDqwWQJNDyRbbl4ltLktn5GNW1xsf7F8bFzlCPwFLKhBpdXtvtcAatOqg6%2FymIUcDpFnk%2FdjJNViJBdqpmd2xMlDpyA3UhPFqFix"}]}');
+                 */
+                //gray   非官方地址
+                //block  封了
+                //<h2 class="weui_msg_title">将要访问</h2>
+                //var title = doc.DocumentNode.SelectSingleNode("//h2[@class=\"weui_msg_title\"]");
+                if (html.Contains("\"type\":\"block\""))
+                {
+                    result = "已封";
+                }
+                else if (html.Contains("\"type\":\"gray\""))
+                {
+                    result = "将会被转码";
+                }
+                else {
+                    result = "非正常";
+                }
+                
+            }
+            var status = (int)rsp.StatusCode;
+            Response.Write("</br>域名检测结果："+ result.ToString());
+            Response.Flush();
         }
     }
 }
