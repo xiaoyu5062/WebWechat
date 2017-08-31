@@ -68,6 +68,14 @@ namespace Wechat.Web.admin.Model
             get;
             set;
         }
+        /// <summary>
+        /// scan user num
+        /// </summary>
+        public object scan_num { get; set; }
+        /// <summary>
+        /// send msg num 
+        /// </summary>
+        public object send_num { get; set; }
     }
 
     [Serializable]

@@ -40,12 +40,14 @@ namespace Wechat.Web.admin
             string sql = string.Empty;
             if (self.level == 2)//员工
             {
-                sql = string.Format("select * from bk_msg where state=0 and uid={0}",
+                sql = string.Format(@"select *,(select count(*) from bk_msg_log WHERE msg_id=bk_msg.id) scan_num,
+COALESCE((SELECT SUM(wx_send_count) FROM bk_msg_log WHERE msg_id = bk_msg.id), 0) send_num from bk_msg where state = 0 and uid = {0}",
            self.parent_id);
             }
             else
             {
-                sql = string.Format("select * from bk_msg where state=0 and uid={0}",
+                sql = string.Format(@"select *,(select count(*) from bk_msg_log WHERE msg_id=bk_msg.id) scan_num,
+COALESCE((SELECT SUM(wx_send_count) FROM bk_msg_log WHERE msg_id = bk_msg.id), 0) send_num from bk_msg where state = 0 and uid = {0}",
             self.id);
             }
             var dt = FXH.DbUtility.AosyMySql.ExecuteforDataSet(sql).Tables[0];

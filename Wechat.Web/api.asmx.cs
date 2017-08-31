@@ -50,6 +50,7 @@ namespace Wechat.Web
             var fan = ~long.Parse(now);
             return "a=" + r + "   b=" + fan;
         }
+
         /// <summary>
         /// 获取登录二维码
         /// </summary>
@@ -150,6 +151,7 @@ namespace Wechat.Web
             xmldoc.LoadXml(html);
             InitWX(xmldoc, uuid);
         }
+
         void InitWX(XmlDocument xml, string uuid)
         {
             string ts = ZFY.FYCommon.GetTimeStamp(DateTime.Now);

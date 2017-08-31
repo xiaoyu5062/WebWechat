@@ -65,8 +65,8 @@
                                                             sb.Append(" <td>" + item.content + "</td>");
                                                             sb.Append(" <td class=\"center\">" + item.create_dt + "</td>");
 
-                                                            sb.Append(" <td class=\"center\">623</td>");
-                                                            sb.Append("<td class=\"center\">1234321</td>");
+                                                            sb.Append(" <td class=\"center\">"+item.scan_num+"</td>");
+                                                            sb.Append("<td class=\"center\">"+item.send_num+"</td>");
                                                             sb.Append(" <td class=\"center\">");
                                                             sb.Append("<button class=\"btn btn-primary \" onclick=\"getlink(" + self.id + "," + self.parent_id + "," + item.id + ");\"  type=\"button\" id=\"copy_btn\"><i class=\"fa fa-check\"></i>&nbsp;生成链接</button>");
                                                             sb.Append("</td>");
